@@ -10,7 +10,7 @@ The original Yolo V5 was an amazing project. For professionals, it should not be
     * [Dataset Preparation](#dataset-preparation)
     * [Training and Testing](#Training-and-Testing)
     * [Detection](#Detection)
-* [Citation](#citation)
+* [Reference](#Reference)
 
 
 ## Features
