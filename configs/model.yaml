@@ -1,6 +1,6 @@
 backbone:
   type: YOLOv5
-  version: L
+  version: X
 head:
   nc: 1
   anchors:
