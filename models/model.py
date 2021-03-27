@@ -9,7 +9,7 @@ from models.backbone import build_backbone
 from models.neck import build_neck
 from models.head import build_head
 from utils.autoanchor import check_anchor_order
-from utils.torch_utils import initialize_weights, fuse_conv_and_bn
+from utils.torch_utils import initialize_weights, fuse_conv_and_bn, model_info
 
 
 class Model(nn.Module):
@@ -49,11 +49,25 @@ class Model(nn.Module):
             b.data[:, 5:] += math.log(0.6 / (m.nc - 0.99)) if cf is None else torch.log(cf / cf.sum())  # cls
             mi.bias = torch.nn.Parameter(b.view(-1), requires_grad=True)
 
+    def fuse(self):  # fuse model Conv2d() + BatchNorm2d() layers
+        print('Fusing layers... ')
+        for module in [self.backbone, self.fpn, self.pan, self.detection]:
+            for m in module.modules():
+                if type(m) is Conv and hasattr(m, 'bn'):
+                    m.conv = fuse_conv_and_bn(m.conv, m.bn)  # update conv
+                    delattr(m, 'bn')  # remove batchnorm
+                    m.forward = m.fuseforward  # update forward
+        self.info()
+        return self
+
+    def info(self, verbose=False, img_size=640):  # print model information
+        model_info(self, verbose, img_size)
+
     def forward(self, x):
         out = self.backbone(x)
         out = self.fpn(out)
         out = self.pan(out)
-        y = self.head(list(out))
+        y = self.detection(list(out))
         return y
 
 
@@ -62,12 +76,8 @@ if __name__ == '__main__':
     device = torch.device('cuda')
     x = torch.zeros(2, 3, 640, 640).to(device)
 
-    model_config = {
-        'backbone': {'type': 'shufflenet_v2_x1_0'},
-        'head': {'nc': 2},
-    }
-
     model = Model(model_config='../configs/model.yaml').to(device)
+    model.fuse()
     import time
 
     tic = time.time()
