@@ -79,11 +79,11 @@ class Model(nn.Module):
 
 if __name__ == '__main__':
 
-    device = torch.device('cuda')
+    device = torch.device('cpu')
     x = torch.zeros(1, 3, 640, 640).to(device)
 
-    model = Model(model_config='../configs/model.yaml').to(device)
-    model.fuse()
+    model = Model(model_config='../configs/efficientnet.yaml').to(device)
+    # model.fuse()
     import time
 
     tic = time.time()

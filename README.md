@@ -26,7 +26,11 @@ The original Yolo V5 was an amazing project. For professionals, it should not be
 
 ## Features
 - Reorganize model structure, such as backbone, neck, head, can modify the network flexibly and conveniently
-- More backbone, mobilenetV3, shufflenetV2, resnet18, 50, 101 and so on
+- mobilenetV3-small, mobilenetV3-large 
+- shufflenet_v2_x0_5, shufflenet_v2_x1_0, shufflenet_v2_x1_5, shufflenet_v2_x2_0
+- yolov5s, yolov5m, yolov5l, yolov5x
+- resnet18, resnet50, resnet34, resnet101, resnet152
+- efficientnet_b0 - efficientnet_b8, efficientnet_l2
 
 
 ## Prerequisites
@@ -79,3 +83,5 @@ shufflenet_v2_x1_0:
 ## Reference
 
 * [ultralytics/yolov5](https://github.com/ultralytics/yolov5)
+* [EfficientNet-PyTorch](https://github.com/lukemelas/EfficientNet-PyTorch)
+* [Mobilenet v3](https://arxiv.org/abs/1905.02244)
