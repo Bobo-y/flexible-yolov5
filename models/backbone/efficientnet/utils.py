@@ -535,7 +535,6 @@ def get_model_params(model_name, override_params):
     """
     if model_name.startswith('efficientnet'):
         w, d, s, p = efficientnet_params(model_name)
-        s = override_params['image_size']
         # note: all models have drop connect rate = 0.2
         blocks_args, global_params = efficientnet(
             width_coefficient=w, depth_coefficient=d, dropout_rate=p, image_size=s)

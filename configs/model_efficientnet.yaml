@@ -1,6 +1,6 @@
 backbone:
-  type: efficientnet_b8
-  image_size: 640
+  type: efficientnet
+  version: b8 # b1 to b8 and l2
 head:
   nc: 1
   anchors:

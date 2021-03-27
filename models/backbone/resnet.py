@@ -222,3 +222,17 @@ def resnet152(pretrained=False, **kwargs):
     if pretrained:
         model.load_state_dict(model_zoo.load_url(model_urls['resnet152'], model_dir='.'), strict=False)
     return model
+
+
+def resnet(pretrained=False, **kwargs):
+    version = kwargs.pop('version')
+    if version == '18':
+        return resnet18(pretrained, **kwargs)
+    if version == '34':
+        return resnet34(pretrained, **kwargs)
+    if version == '50':
+        return resnet50(pretrained, **kwargs)
+    if version == '101':
+        return resnet101(pretrained, **kwargs)
+    if version == '152':
+        return resnet152(pretrained, **kwargs)

@@ -101,7 +101,7 @@ class MobileNetV3(nn.Module):
         super().__init__()
         in_channels = 3
         self.scale = kwargs.get('scale', 0.5)
-        model_name = kwargs.get('model_name', 'large')
+        model_name = kwargs.get('version', 'large')
         self.inplanes = 16
         if model_name == "large":
             self.cfg = [

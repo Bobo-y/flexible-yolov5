@@ -1,12 +1,13 @@
 import torch
 import torch.nn as nn
+from utils.autoanchor import check_anchor_order
 
 
 class YOLOHead(nn.Module):
     stride = None
     export = False
 
-    def __init__(self, nc, anchors=None, ch=(256, 512, 1024)):  # detection layer
+    def __init__(self, nc, anchors=None, ch=(256, 512, 1024), stride=[8., 16., 32.]):  # detection layer
         super(YOLOHead, self).__init__()
         if anchors is None:
             anchors = [[10, 13, 16, 30, 33, 23], [30, 61, 62, 45, 59, 119], [116, 90, 156, 198, 373, 326]]
@@ -21,6 +22,9 @@ class YOLOHead(nn.Module):
         self.register_buffer('anchors', a)  # shape(nl,na,2)
         self.register_buffer('anchor_grid', a.clone().view(self.nl, 1, -1, 1, 1, 2))  # shape(nl,1,na,1,1,2)
         self.m = nn.ModuleList(nn.Conv2d(x, self.no * self.na, 1) for x in ch)  # output conv
+        self.stride = torch.tensor(stride)
+        self.anchors /= self.stride.view(-1, 1, 1)
+        check_anchor_order(self)
 
     def forward(self, x):
         z = []  # inference output

@@ -200,10 +200,26 @@ def shufflenet_v2_x2_0(pretrained=False, progress=True, **kwargs):
                          [4, 8, 4], [24, 244, 488, 976, 2048], **kwargs)
 
 
-# model = shufflenet_v2_x1_0()
-# import torch
-# device = torch.device('cpu')
-# x = torch.zeros(2, 3, 640, 640).to(device)
-# y = model(x)
-# for item in y:
-#     print(item.shape)
+def shufflenetv2(pretrained=False, progress=True, **kwargs):
+    """
+    Constructs a ShuffleNetV2 with 2.0x output channels, as described in
+    `"ShuffleNet V2: Practical Guidelines for Efficient CNN Architecture Design"
+    <https://arxiv.org/abs/1807.11164>`_.
+
+    Args:
+        pretrained (bool): If True, returns a model pre-trained on ImageNet
+        progress (bool): If True, displays a progress bar of the download to stderr
+    """
+    version = kwargs.get('version', 'x1_0')
+    if version == 'x0_5':
+        return _shufflenetv2('shufflenetv2_x0.5', pretrained, progress,
+                             [4, 8, 4], [24, 48, 96, 192, 1024], **kwargs)
+    if version == 'x1_0':
+        return _shufflenetv2('shufflenetv2_x1.0', pretrained, progress,
+                             [4, 8, 4], [24, 116, 232, 464, 1024], **kwargs)
+    if version == 'x1_5':
+        return _shufflenetv2('shufflenetv2_x1.5', pretrained, progress,
+                             [4, 8, 4], [24, 176, 352, 704, 1024], **kwargs)
+    if version == 'x2_0':
+        return _shufflenetv2('shufflenetv2_x2.0', pretrained, progress,
+                             [4, 8, 4], [24, 244, 488, 976, 2048], **kwargs)

@@ -6,8 +6,17 @@ from utils.general import make_divisible
 class PAN(nn.Module):
     """
         This PAN if refer to yolov5, there are many different versions of implementation, and the details will be different.
-        默认的输出通道数设置成了yolov5L的输出通道数, 当backbone为YOLOV5时，会根据version对输出通道转为了YOLOv5 对应版本的输出。对于其他backbone，使用的默认值。
-        """
+        默认的输出通道数设置成了yolov5L的输出通道数, 当backbone为YOLOV5时，会根据version对输出通道转为了YOLOv5 对应版本的输出。对于其他backbone，使用的默认值.
+
+
+    P3 --->  PP3
+    ^         |
+    | concat  V
+    P4 --->  PP4
+    ^         |
+    | concat  V
+    P5 --->  PP5
+    """
 
     def __init__(self, P3_size=512, P4_size=256, P5_size=512, inner_p3=256, inner_p4=512, inner_p5=1024, version='L'):
         super(PAN, self).__init__()
@@ -17,8 +26,13 @@ class PAN(nn.Module):
                  'l': {'gd': 1, 'gw': 1},
                  'x': {'gd': 1.33, 'gw': 1.25}}
 
-        self.gd = gains[self.version.lower()]['gd']  # depth gain
-        self.gw = gains[self.version.lower()]['gw']  # width gain
+        if self.version.lower() in gains:
+            # only for yolov5
+            self.gd = gains[self.version.lower()]['gd']  # depth gain
+            self.gw = gains[self.version.lower()]['gw']  # width gain
+        else:
+            self.gd = 1
+            self.gw = 1
 
         self.channels_out = {
             'inner_p3': inner_p3,

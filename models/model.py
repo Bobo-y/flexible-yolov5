@@ -8,7 +8,6 @@ from models.modules.common import Conv
 from models.backbone import build_backbone
 from models.neck import build_neck
 from models.head import build_head
-from utils.autoanchor import check_anchor_order
 from utils.torch_utils import initialize_weights, fuse_conv_and_bn, model_info
 
 
@@ -17,6 +16,7 @@ class Model(nn.Module):
         """
         :param model_config:
         """
+
         super(Model, self).__init__()
         if type(model_config) is str:
             model_config = yaml.load(open(model_config, 'r'))
@@ -24,24 +24,18 @@ class Model(nn.Module):
         backbone_type = model_config.backbone.pop('type')
         self.backbone = build_backbone(backbone_type, **model_config.backbone)
         backbone_out = self.backbone.out_shape
+
         self.fpn = build_neck('FPN', **backbone_out)
         fpn_out = self.fpn.out_shape
 
-        version = {'version': 'L'}
-        if 'version' in model_config.backbone:
-            version['version'] = model_config.backbone['version']
-        args = {**fpn_out, **version}
+        args = {**fpn_out, **model_config.backbone}
         self.pan = build_neck('PAN', **args)
 
         pan_out = self.pan.out_shape
         model_config.head['ch'] = pan_out
         self.detection = build_head('YOLOHead', **model_config.head)
-        self.detection.stride = torch.tensor([8., 16., 32.])
-        self.detection.anchors /= self.detection.stride.view(-1, 1, 1)
-
-        check_anchor_order(self.detection)
         self.stride = self.detection.stride
-        self._initialize_biases()  # only run once
+        self._initialize_biases()
 
         initialize_weights(self)
 
@@ -78,11 +72,12 @@ class Model(nn.Module):
 
 
 if __name__ == '__main__':
-
+    import os
+    os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
     device = torch.device('cpu')
     x = torch.zeros(1, 3, 640, 640).to(device)
 
-    model = Model(model_config='../configs/efficientnet.yaml').to(device)
+    model = Model(model_config='../configs/model_yolo.yaml').to(device)
     # model.fuse()
     import time
 

@@ -386,7 +386,7 @@ class EfficientNet(nn.Module):
         """
         cls._check_model_name_is_valid(model_name)
         _, _, res, _ = efficientnet_params(model_name)
-        return res
+        return None
 
     @classmethod
     def _check_model_name_is_valid(cls, model_name):
@@ -413,161 +413,18 @@ class EfficientNet(nn.Module):
             self._conv_stem = Conv2d(in_channels, out_channels, kernel_size=3, stride=2, bias=False)
 
 
-def efficientnet_b0(pretrained=False, **kwargs):
+def efficientnet(pretrained=False, **kwargs):
     """Constructs a efficientNet model.
     Args:
         pretrained (bool): If True, returns a model pre-trained on ImageNet
     """
-    version = 'efficientnet-b0'
+    version = kwargs.pop('version')
+    version = 'efficientnet-' + version
     if pretrained:
         model = EfficientNet.from_pretrained(version)
     else:
         model = EfficientNet.from_name(version, **kwargs)
     device = torch.device('cpu')
-    x = torch.zeros(1, 3, kwargs['image_size'], kwargs['image_size']).to(device)
-    _ = model(x)
-    return model
-
-
-def efficientnet_b1(pretrained=False, **kwargs):
-    """Constructs a efficientNet model.
-    Args:
-        pretrained (bool): If True, returns a model pre-trained on ImageNet
-    """
-    version = 'efficientnet-b1'
-    if pretrained:
-        model = EfficientNet.from_pretrained(version)
-    else:
-        model = EfficientNet.from_name(version, **kwargs)
-    device = torch.device('cpu')
-    x = torch.zeros(1, 3, kwargs['image_size'], kwargs['image_size']).to(device)
-    _ = model(x)
-    return model
-
-
-def efficientnet_b2(pretrained=False, **kwargs):
-    """Constructs a efficientNet model.
-    Args:
-        pretrained (bool): If True, returns a model pre-trained on ImageNet
-    """
-    version = 'efficientnet-b2'
-    if pretrained:
-        model = EfficientNet.from_pretrained(version)
-    else:
-        model = EfficientNet.from_name(version, **kwargs)
-    device = torch.device('cpu')
-    x = torch.zeros(1, 3, kwargs['image_size'], kwargs['image_size']).to(device)
-    _ = model(x)
-    return model
-
-
-def efficientnet_b3(pretrained=False, **kwargs):
-    """Constructs a efficientNet model.
-    Args:
-        pretrained (bool): If True, returns a model pre-trained on ImageNet
-    """
-    version = 'efficientnet-b3'
-    if pretrained:
-        model = EfficientNet.from_pretrained(version)
-    else:
-        model = EfficientNet.from_name(version, **kwargs)
-    device = torch.device('cpu')
-    x = torch.zeros(1, 3, kwargs['image_size'], kwargs['image_size']).to(device)
-    _ = model(x)
-    return model
-
-
-def efficientnet_b4(pretrained=False, **kwargs):
-    """Constructs a efficientNet model.
-    Args:
-        pretrained (bool): If True, returns a model pre-trained on ImageNet
-    """
-    version = 'efficientnet-b4'
-    if pretrained:
-        model = EfficientNet.from_pretrained(version)
-    else:
-        model = EfficientNet.from_name(version, **kwargs)
-    device = torch.device('cpu')
-    x = torch.zeros(1, 3, kwargs['image_size'], kwargs['image_size']).to(device)
-    _ = model(x)
-    return model
-
-
-def efficientnet_b5(pretrained=False, **kwargs):
-    """Constructs a efficientNet model.
-    Args:
-        pretrained (bool): If True, returns a model pre-trained on ImageNet
-    """
-    version = 'efficientnet-b5'
-    if pretrained:
-        model = EfficientNet.from_pretrained(version)
-    else:
-        model = EfficientNet.from_name(version, **kwargs)
-    device = torch.device('cpu')
-    x = torch.zeros(1, 3, kwargs['image_size'], kwargs['image_size']).to(device)
-    _ = model(x)
-    return model
-
-
-def efficientnet_b6(pretrained=False, **kwargs):
-    """Constructs a efficientNet model.
-    Args:
-        pretrained (bool): If True, returns a model pre-trained on ImageNet
-    """
-    version = 'efficientnet-b6'
-    if pretrained:
-        model = EfficientNet.from_pretrained(version)
-    else:
-        model = EfficientNet.from_name(version, **kwargs)
-    device = torch.device('cpu')
-    x = torch.zeros(1, 3, kwargs['image_size'], kwargs['image_size']).to(device)
-    _ = model(x)
-    return model
-
-
-def efficientnet_b7(pretrained=False, **kwargs):
-    """Constructs a efficientNet model.
-    Args:
-        pretrained (bool): If True, returns a model pre-trained on ImageNet
-    """
-    version = 'efficientnet-b7'
-    if pretrained:
-        model = EfficientNet.from_pretrained(version)
-    else:
-        model = EfficientNet.from_name(version, **kwargs)
-    device = torch.device('cpu')
-    x = torch.zeros(1, 3, kwargs['image_size'], kwargs['image_size']).to(device)
-    _ = model(x)
-    return model
-
-
-def efficientnet_b8(pretrained=False, **kwargs):
-    """Constructs a efficientNet model.
-    Args:
-        pretrained (bool): If True, returns a model pre-trained on ImageNet
-    """
-    version = 'efficientnet-b8'
-    if pretrained:
-        model = EfficientNet.from_pretrained(version)
-    else:
-        model = EfficientNet.from_name(version, **kwargs)
-    device = torch.device('cpu')
-    x = torch.zeros(1, 3, kwargs['image_size'], kwargs['image_size']).to(device)
-    _ = model(x)
-    return model
-
-
-def efficientnet_l2(pretrained=False, **kwargs):
-    """Constructs a efficientNet model.
-    Args:
-        pretrained (bool): If True, returns a model pre-trained on ImageNet
-    """
-    version = 'efficientnet-l2'
-    if pretrained:
-        model = EfficientNet.from_pretrained(version)
-    else:
-        model = EfficientNet.from_name(version, **kwargs)
-    device = torch.device('cpu')
-    x = torch.zeros(1, 3, kwargs['image_size'], kwargs['image_size']).to(device)
+    x = torch.zeros(1, 3, 640, 640).to(device)
     _ = model(x)
     return model

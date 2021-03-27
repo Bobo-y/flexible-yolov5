@@ -1,6 +1,6 @@
 backbone:
-  type: mobilenetv3
-  version: large # or small
+  type: shufflenetv2
+  version: x1_0  # x0_5, x1_0, x1_5, x2_0
 head:
   nc: 1
   anchors:

@@ -29,7 +29,7 @@ The original Yolo V5 was an amazing project. For professionals, it should not be
 - mobilenetV3-small, mobilenetV3-large 
 - shufflenet_v2_x0_5, shufflenet_v2_x1_0, shufflenet_v2_x1_5, shufflenet_v2_x2_0
 - yolov5s, yolov5m, yolov5l, yolov5x
-- resnet18, resnet50, resnet34, resnet101, resnet152
+- resnet18, resnet50, resnet34, resnet101, resnet152 (CBAM)
 - efficientnet_b0 - efficientnet_b8, efficientnet_l2
 
 

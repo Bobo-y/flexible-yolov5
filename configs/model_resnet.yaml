@@ -1,5 +1,6 @@
 backbone:
-  type: resnet50
+  type: resnet
+  version: 50  # 18, 34, 50, 101, 152
 head:
   nc: 1
   anchors:
