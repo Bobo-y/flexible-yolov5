@@ -5,7 +5,7 @@ from utils.general import make_divisible
 
 class PAN(nn.Module):
     """
-        This PAN if refer to yolov5, there are many different versions of implementation, and the details will be different.
+        This PAN  refer to yolov5, there are many different versions of implementation, and the details will be different.
         默认的输出通道数设置成了yolov5L的输出通道数, 当backbone为YOLOV5时，会根据version对输出通道转为了YOLOv5 对应版本的输出。对于其他backbone，使用的默认值.
 
 

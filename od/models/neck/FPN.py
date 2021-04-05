@@ -5,7 +5,7 @@ from utils.general import make_divisible
 
 class PyramidFeatures(nn.Module):
     """
-    this FPN if refer to yolov5, there are many different versions of implementation, and the details will be different
+    this FPN  refer to yolov5, there are many different versions of implementation, and the details will be different
 
          concat
     C3 --->   P3

@@ -12,10 +12,9 @@ sys.path.append('./')  # to run '$ python *.py' files in subdirectories
 
 import torch
 import torch.nn as nn
-
-import models
-from models.modules.experimental import attempt_load
-from models.modules.activations import Hardswish, SiLU
+import od.models as models
+from od.models.modules.experimental import attempt_load
+from od.models.modules.activations import Hardswish, SiLU
 from utils.general import set_logging, check_img_size
 
 if __name__ == '__main__':
