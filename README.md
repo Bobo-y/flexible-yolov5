@@ -42,7 +42,7 @@ please refer requirements.txt
 
 ### Dataset Preparation
 
-Make data for yolov5 format. you can use utils/make_yolov5_data.py convert VOC data to yolov5 data format.
+Make data for yolov5 format. you can use od/data/transform_voc.py convert VOC data to yolov5 data format.
 
 ### Training and Testing
 
