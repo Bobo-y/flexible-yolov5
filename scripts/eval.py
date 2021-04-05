@@ -8,7 +8,8 @@ import numpy as np
 import torch
 import yaml
 from tqdm import tqdm
-
+import sys
+sys.path.append('.')
 from od.models.modules.experimental import attempt_load
 from od import create_dataloader
 from utils.general import coco80_to_coco91_class, check_dataset, check_file, check_img_size, check_requirements, \

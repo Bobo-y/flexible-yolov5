@@ -1,3 +1,5 @@
+import sys
+sys.path.append('.')
 from od.models.modules.experimental import *
 from od.data.datasets import letterbox
 from utils.general import *

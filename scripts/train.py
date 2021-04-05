@@ -19,8 +19,8 @@ from torch.cuda import amp
 from torch.nn.parallel import DistributedDataParallel as DDP
 from torch.utils.tensorboard import SummaryWriter
 from tqdm import tqdm
-
-from . import eval
+import sys
+sys.path.append('.')
 from od.models.modules.experimental import attempt_load
 from od import Model
 from od import ComputeLoss
@@ -32,6 +32,7 @@ from utils.general import labels_to_class_weights, increment_path, labels_to_ima
 from utils.google_utils import attempt_download
 from utils.plots import plot_images, plot_labels, plot_results, plot_evolution
 from utils.torch_utils import ModelEMA, select_device, intersect_dicts, torch_distributed_zero_first
+from scripts.eval import test
 
 logger = logging.getLogger(__name__)
 
@@ -340,7 +341,7 @@ def train(hyp, opt, device, tb_writer=None, wandb=None):
                 ema.update_attr(model, include=['yaml', 'nc', 'hyp', 'gr', 'names', 'stride', 'class_weights'])
             final_epoch = epoch + 1 == epochs
             if not opt.notest or final_epoch:  # Calculate mAP
-                results, maps, times = eval.test(opt.data,
+                results, maps, times = test(opt.data,
                                                  batch_size=batch_size * 2,
                                                  imgsz=imgsz_test,
                                                  model=ema.ema,
@@ -416,7 +417,7 @@ def train(hyp, opt, device, tb_writer=None, wandb=None):
         logger.info('%g epochs completed in %.3f hours.\n' % (epoch - start_epoch + 1, (time.time() - t0) / 3600))
         if opt.data.endswith('coco.yaml') and nc == 80:  # if COCO
             for conf, iou, save_json in ([0.25, 0.45, False], [0.001, 0.65, True]):  # speed, mAP tests
-                results, _, _ = eval.test(opt.data,
+                results, _, _ = test(opt.data,
                                           batch_size=batch_size * 2,
                                           imgsz=imgsz_test,
                                           conf_thres=conf,
@@ -438,8 +439,8 @@ def train(hyp, opt, device, tb_writer=None, wandb=None):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('--weights', type=str, default='yolov5l.pt', help='initial weights path')
-    parser.add_argument('--cfg', type=str, default='configs/model.yaml', help='model.yaml path')
+    parser.add_argument('--weights', type=str, default='', help='initial weights path')
+    parser.add_argument('--cfg', type=str, default='configs/model_yolo.yaml', help='model.yaml path')
     parser.add_argument('--data', type=str, default='configs/data.yaml', help='data.yaml path')
     parser.add_argument('--hyp', type=str, default='configs/hyp.scratch.yaml', help='hyperparameters path')
     parser.add_argument('--epochs', type=int, default=300)
