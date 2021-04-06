@@ -7,7 +7,7 @@ The original Yolo V5 was an amazing project. For professionals, it should not be
   trying other backbones. Maybe there are people like me, so I split the yolov5 model to {backbone, neck, head} to 
   facilitate the operation of various modules and support more backbones.Basically, I only changed the model, and I 
   didn't change the architecture, training and testing of yolov5. Therefore, if the original code is updated, it is also
-   very convenient to update this code.
+   very convenient to update this code. if this repo can help you, please give me a star
 
 原始的yolov5是个了不起的开源项目。但是作者构建网络都是以解析config文件的形式进行，当然了，对于编码高手来说，理解、修改网络并不难, 对于我这种菜鸟来说, 以config 
 文件构建网络不太直观，魔改起来也很困难。因此，自己花了一点时间, 将YOLOv5的网络部分进行剥离, 参照主流的 pytorch 网络构建形式, 分成 backbone, neck, head
