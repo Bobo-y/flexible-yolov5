@@ -28,9 +28,9 @@ def conv3x3(in_planes, out_planes, stride=1):
 class BasicBlock(nn.Module):
     expansion = 1
 
-    def __init__(self, inplanes, planes, stride=1, downsample=None, cbam=False, dcn=None):
+    def __init__(self, inplanes, planes, stride=1, downsample=None, cbam=False, dcn=False):
         super(BasicBlock, self).__init__()
-        self.with_dcn = dcn is not None
+        self.with_dcn = dcn
         self.conv1 = conv3x3(inplanes, planes, stride)
         self.bn1 = nn.BatchNorm2d(planes)
         self.relu = nn.ReLU(inplace=True)
@@ -80,9 +80,9 @@ class BasicBlock(nn.Module):
 class Bottleneck(nn.Module):
     expansion = 4
 
-    def __init__(self, inplanes, planes, stride=1, downsample=None, cbam=False, dcn=None):
+    def __init__(self, inplanes, planes, stride=1, downsample=None, cbam=False, dcn=False):
         super(Bottleneck, self).__init__()
-        self.with_dcn = dcn is not None
+        self.with_dcn = dcn
         self.conv1 = nn.Conv2d(inplanes, planes, kernel_size=1, bias=False)
         self.bn1 = nn.BatchNorm2d(planes)
         if not self.with_dcn:
@@ -138,7 +138,7 @@ class Bottleneck(nn.Module):
 
 class Resnet(nn.Module):
 
-    def __init__(self, block, layers, cbam=False, dcn=None):
+    def __init__(self, block, layers, cbam=False, dcn=False):
         super(Resnet, self).__init__()
         self.inplanes = 64
         self.dcn = dcn

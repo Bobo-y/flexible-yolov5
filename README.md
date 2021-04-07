@@ -80,7 +80,9 @@ MobileNetV3:
 shufflenet_v2_x1_0:
 ![](images/shufflenet.jpg)
 
+## bugs
 
+- resnet with dcn, training on gpu *RuntimeError: expected scalar type Half but found Float*
 ## Reference
 
 * [ultralytics/yolov5](https://github.com/ultralytics/yolov5)
