@@ -4,10 +4,11 @@ from .shufflenetv2 import shufflenetv2
 from .mobilenetv3 import MobileNetV3 as mobilenetv3
 from .yolov5 import YOLOv5
 from .efficientnet import efficientnet
+from .hrnet import hrnet
 
 __all__ = ['build_backbone']
 
-support_backbone = ['resnet', 'shufflenetv2', 'mobilenetv3', 'YOLOv5', 'efficientnet']
+support_backbone = ['resnet', 'shufflenetv2', 'mobilenetv3', 'YOLOv5', 'efficientnet', 'hrnet']
 
 
 def build_backbone(backbone_name, **kwargs):

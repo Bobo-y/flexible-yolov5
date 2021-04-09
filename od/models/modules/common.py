@@ -4,7 +4,7 @@ import math
 import torch
 import torch.nn as nn
 
-
+nn.functional
 def autopad(k, p=None):  # kernel, padding
     # Pad to 'same'
     if p is None:

@@ -31,6 +31,7 @@ The original Yolo V5 was an amazing project. For professionals, it should not be
 - yolov5s, yolov5m, yolov5l, yolov5x
 - resnet18, resnet50, resnet34, resnet101, resnet152 
 - efficientnet_b0 - efficientnet_b8, efficientnet_l2
+- hrnet 18,32,48
 - CBAM, DCN
 
 
