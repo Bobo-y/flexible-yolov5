@@ -51,11 +51,11 @@ For training and Testing, it's same like yolov5.
 
 ### Training
 
-1. check out configs/data.yaml, and replace with your data.
-2. check out configs/model_*.yaml, choose backbone. please refer support_backbone in models.backbone.__init__.py
+1. check out configs/data.yaml, and replace with your data， and number of object nc
+2. check out configs/model_*.yaml, choose backbone. and change nc to your dataset. please refer support_backbone in models.backbone.__init__.py
 3. 
 ```shell script
-$ python scripts/train.py  --batch 16 --epochs 5 --data configs/data.yaml --cfg confgis/model.yaml
+$ python scripts/train.py  --batch 16 --epochs 5 --data configs/data.yaml --cfg confgis/model_XXX.yaml
 ```
 
 ### Testing and Visualize
