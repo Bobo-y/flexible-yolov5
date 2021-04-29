@@ -1,14 +1,14 @@
 import torch.nn as nn
-from od.models.modules.common import Focus, Conv, C3, SPP, BottleneckCSP
+from od.models.modules.common import Focus, Conv, C3, SPP, BottleneckCSP, C3TR
 from utils.general import make_divisible
 
 
 class YOLOv5(nn.Module):
-    def __init__(self, focus=True, version='L'):
+    def __init__(self, focus=True, version='L', with_C3TR=False):
         super(YOLOv5, self).__init__()
         self.version = version
         self.with_focus = focus
-
+        self.with_c3tr = with_C3TR
         gains = {'s': {'gd': 0.33, 'gw': 0.5},
                  'm': {'gd': 0.67, 'gw': 0.75},
                  'l': {'gd': 1, 'gw': 1},
@@ -38,14 +38,17 @@ class YOLOv5(nn.Module):
 
         # for latest yolov5, you can change BottleneckCSP to C3
         self.stage2_1 = Conv(self.channels_out['stage1'], self.channels_out['stage2_1'], k=3, s=2)
-        self.stage2_2 = BottleneckCSP(self.channels_out['stage2_1'], self.channels_out['stage2_2'], self.get_depth(3))
+        self.stage2_2 = C3(self.channels_out['stage2_1'], self.channels_out['stage2_2'], self.get_depth(3))
         self.stage3_1 = Conv(self.channels_out['stage2_2'], self.channels_out['stage3_1'], 3, 2)
-        self.stage3_2 = BottleneckCSP(self.channels_out['stage3_1'], self.channels_out['stage3_2'], self.get_depth(9))
+        self.stage3_2 = C3(self.channels_out['stage3_1'], self.channels_out['stage3_2'], self.get_depth(9))
         self.stage4_1 = Conv(self.channels_out['stage3_2'], self.channels_out['stage4_1'], 3, 2)
-        self.stage4_2 = BottleneckCSP(self.channels_out['stage4_1'], self.channels_out['stage4_2'], self.get_depth(9))
+        self.stage4_2 = C3(self.channels_out['stage4_1'], self.channels_out['stage4_2'], self.get_depth(9))
         self.stage5 = Conv(self.channels_out['stage4_2'], self.channels_out['stage5'], 3, 2)
         self.spp = SPP(self.channels_out['stage5'], self.channels_out['spp'], [5, 9, 13])
-        self.csp1 = BottleneckCSP(self.channels_out['spp'], self.channels_out['csp1'], self.get_depth(3), False)
+        if self.with_c3tr:
+            self.c3tr = C3TR(self.channels_out['spp'], self.channels_out['csp1'], self.get_depth(3), False)
+        else:
+            self.csp1 = C3(self.channels_out['spp'], self.channels_out['csp1'], self.get_depth(3), False)
         self.conv1 = Conv(self.channels_out['csp1'], self.channels_out['conv1'], 1, 1)
         self.out_shape = {'C3_size': self.channels_out['stage3_2'],
                           'C4_size': self.channels_out['stage4_2'],

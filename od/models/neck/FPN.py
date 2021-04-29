@@ -1,5 +1,5 @@
 import torch.nn as nn
-from od.models.modules.common import BottleneckCSP, Conv, Concat
+from od.models.modules.common import BottleneckCSP, Conv, Concat, C3
 from utils.general import make_divisible
 
 
@@ -46,7 +46,7 @@ class PyramidFeatures(nn.Module):
 
         self.P5_upsampled = nn.Upsample(scale_factor=2, mode='nearest')
 
-        self.P4_1 = BottleneckCSP(self.C5_size + self.C4_size, self.channels_out['inner_p4'], self.get_depth(3), False)
+        self.P4_1 = C3(self.C5_size + self.C4_size, self.channels_out['inner_p4'], self.get_depth(3), False)
         self.P4_upsampled = nn.Upsample(scale_factor=2, mode='nearest')
         self.P4_2 = Conv(self.channels_out['inner_p4'], self.channels_out['outer_p4'], 1, 1)
         self.out_shape = {'P3_size': self.C3_size + self.channels_out['outer_p4'],

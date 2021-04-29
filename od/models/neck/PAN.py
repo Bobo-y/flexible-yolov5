@@ -1,5 +1,5 @@
 import torch.nn as nn
-from od.models.modules.common import BottleneckCSP, Conv, Concat
+from od.models.modules.common import BottleneckCSP, Conv, Concat, C3
 from utils.general import make_divisible
 
 
@@ -47,11 +47,11 @@ class PAN(nn.Module):
         self.inner_p3 = self.channels_out['inner_p3']
         self.inner_p4 = self.channels_out['inner_p4']
         self.inner_p5 = self.channels_out['inner_p5']
-        self.P3 = BottleneckCSP(self.P3_size, self.inner_p3, self.get_depth(3), False)
+        self.P3 = C3(self.P3_size, self.inner_p3, self.get_depth(3), False)
         self.convP3 = Conv(self.inner_p3, self.inner_p3, 3, 2)
-        self.P4 = BottleneckCSP(self.P4_size + self.inner_p3, self.inner_p4, self.get_depth(3), False)
+        self.P4 = C3(self.P4_size + self.inner_p3, self.inner_p4, self.get_depth(3), False)
         self.convP4 = Conv(self.inner_p4, self.inner_p4, 3, 2)
-        self.P5 = BottleneckCSP(self.inner_p4 + P5_size, self.inner_p5, self.get_depth(3), False)
+        self.P5 = C3(self.inner_p4 + P5_size, self.inner_p5, self.get_depth(3), False)
         self.concat = Concat()
         self.out_shape = (self.inner_p3, self.inner_p4, self.inner_p5)
         print("PAN input channel size: P3 {}, P4 {}, P5 {}".format(self.P3_size, self.P4_size, self.P5_size))

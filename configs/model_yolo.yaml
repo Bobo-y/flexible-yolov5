@@ -1,6 +1,8 @@
 backbone:
   type: YOLOv5
   version: s # x, m, l ,x
+  focus: True
+  with_C3TR: False
 head:
   nc: 1
   stride: [8.0, 16.0, 32.0]
