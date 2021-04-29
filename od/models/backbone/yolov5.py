@@ -67,8 +67,12 @@ class YOLOv5(nn.Module):
         c4 = self.stage4_2(x41)
         x5 = self.stage5(c4)
         spp = self.spp(x5)
-        csp1 = self.csp1(spp)
-        c5 = self.conv1(csp1)
+        if not self.with_c3tr:
+            csp1 = self.csp1(spp)
+            c5 = self.conv1(csp1)
+        else:
+            c3tr = self.c3tr(spp)
+            c5 = self.conv1(c3tr)
         return c3, c4, c5
 
     def get_depth(self, n):
