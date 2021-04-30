@@ -7,12 +7,12 @@ The original Yolo V5 was an amazing project. For professionals, it should not be
   trying other backbones. Maybe there are people like me, so I split the yolov5 model to {backbone, neck, head} to 
   facilitate the operation of various modules and support more backbones.Basically, I only changed the model, and I 
   didn't change the architecture, training and testing of yolov5. Therefore, if the original code is updated, it is also
-   very convenient to update this code. if this repo can help you, please give me a star
+   very convenient to update this code. if this repo can help you, please give me a star.
 
 原始的yolov5是个了不起的开源项目。但是作者构建网络都是以解析config文件的形式进行，当然了，对于编码高手来说，理解、修改网络并不难, 对于我这种菜鸟来说, 以config 
 文件构建网络不太直观，魔改起来也很困难。因此，自己花了一点时间, 将YOLOv5的网络部分进行剥离, 参照主流的 pytorch 网络构建形式, 分成 backbone, neck, head
 进行插件式构建, 实现支持 resnet, mobilenet, shufflenet, 当然了别的backbone也可以轻松的集成进去, 对于小模块, 如 SE, CBAM 集成也很方便. 本人基本只改了网络构建
-代码, 训练、测试、数据生成等基本没有大的改动. 
+代码, 训练、测试、数据生成等基本没有大的改动. 注意: 由于整个代码结构改了, 所以暂时无法加载作者提供的预训练权重, 但是由于YOLOv5这个训练外壳设计的很好，即使没有预训练权重训练收敛也很快.
 
 ## Table of contents
 * [Features](#features)
@@ -32,7 +32,7 @@ The original Yolo V5 was an amazing project. For professionals, it should not be
 - resnet18, resnet50, resnet34, resnet101, resnet152 
 - efficientnet_b0 - efficientnet_b8, efficientnet_l2
 - hrnet 18,32,48
-- CBAM, DCN
+- CBAM, DCN(bug!!)
 
 
 ## Prerequisites
@@ -89,3 +89,7 @@ shufflenet_v2_x1_0:
 * [ultralytics/yolov5](https://github.com/ultralytics/yolov5)
 * [EfficientNet-PyTorch](https://github.com/lukemelas/EfficientNet-PyTorch)
 * [Mobilenet v3](https://arxiv.org/abs/1905.02244)
+* [resnet](https://arxiv.org/abs/1512.03385)
+* [hrnet](https://arxiv.org/abs/1908.07919)
+* [shufflenet](https://arxiv.org/abs/1707.01083)
+* 
