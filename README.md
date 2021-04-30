@@ -32,7 +32,7 @@ The original Yolo V5 was an amazing project. For professionals, it should not be
 - resnet18, resnet50, resnet34, resnet101, resnet152 
 - efficientnet_b0 - efficientnet_b8, efficientnet_l2
 - hrnet 18,32,48
-- CBAM, DCN(bug!!)
+- CBAM, DCN (mixed precision training not support, if you want use dcn, please close amp in line 292 of scripts/train.py)
 
 
 ## Prerequisites
@@ -83,7 +83,7 @@ shufflenet_v2_x1_0:
 
 ## bugs
 
-- resnet with dcn, training on gpu *RuntimeError: expected scalar type Half but found Float*
+- ~~resnet with dcn, training on gpu *RuntimeError: expected scalar type Half but found Float~~
 ## Reference
 
 * [ultralytics/yolov5](https://github.com/ultralytics/yolov5)
