@@ -47,7 +47,8 @@ if __name__ == '__main__':
                 m.act = Hardswish()
             elif isinstance(m.act, nn.SiLU):
                 m.act = SiLU()
-    model.detection.export = True  # set Detect() layer export=True
+    model.detection.export = False  # set Detect() layer export=True
+    # 设置为True的时候，detection 层没有被包含在模型中，设置为False 三个检测层的结果才会合并在一起, 有点懵逼
     y = model(img)  # dry run
 
     # TorchScript export
@@ -65,6 +66,7 @@ if __name__ == '__main__':
         import onnx
 
         print('\nStarting ONNX export with onnx %s...' % onnx.__version__)
+
         f = opt.weights.replace('.pt', '.onnx')  # filename
         torch.onnx.export(model, img, f, verbose=False, opset_version=12, input_names=['images'],
                           output_names=['classes', 'boxes'] if y is None else ['output'])
