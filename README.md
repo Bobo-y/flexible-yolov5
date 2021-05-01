@@ -16,6 +16,7 @@ The original Yolo V5 was an amazing project. For professionals, it should not be
 
 ## Table of contents
 * [Features](#features)
+* [Notices](#Notices)
 * [Prerequisites](#prerequisites)
 * [Getting Started](#getting-started)
     * [Dataset Preparation](#dataset-preparation)
@@ -28,13 +29,17 @@ The original Yolo V5 was an amazing project. For professionals, it should not be
 - Reorganize model structure, such as backbone, neck, head, can modify the network flexibly and conveniently
 - mobilenetV3-small, mobilenetV3-large 
 - shufflenet_v2_x0_5, shufflenet_v2_x1_0, shufflenet_v2_x1_5, shufflenet_v2_x2_0
-- yolov5s, yolov5m, yolov5l, yolov5x
+- yolov5s, yolov5m, yolov5l, yolov5x, yolov5transformer
 - resnet18, resnet50, resnet34, resnet101, resnet152 
 - efficientnet_b0 - efficientnet_b8, efficientnet_l2
 - hrnet 18,32,48
-- CBAM
+- CBAM, SE
 - DCN (mixed precision training not support, if you want use dcn, please close amp in line 292 of scripts/train.py)
+- coord conv
 
+## Notices
+
+The CBAM, SE, DCN, coord conv. At present, the above plug-ins are not added to all networks, so you may need to modify the code yourself
 
 ## Prerequisites
 
@@ -93,4 +98,4 @@ shufflenet_v2_x1_0:
 * [resnet](https://arxiv.org/abs/1512.03385)
 * [hrnet](https://arxiv.org/abs/1908.07919)
 * [shufflenet](https://arxiv.org/abs/1707.01083)
-* 
+
