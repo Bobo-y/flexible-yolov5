@@ -68,7 +68,7 @@ class Detector(object):
         img /= 255.0
         if img.ndimension() == 3:
             img = img.unsqueeze(0)
-        pred = self.model(img, augment=False)[0]
+        pred = self.model(img)[0]
         pred = non_max_suppression(pred, self.conf_thres, self.iou_thres, classes=self.classes,
                                    agnostic=self.agnostic_nms)
         for i, det in enumerate(pred):
@@ -104,7 +104,7 @@ class Detector(object):
         img /= 255.0
         if img.ndimension() == 3:
             img = img.unsqueeze(0)
-        pred = self.model(img, augment=False)[0]
+        pred = self.model(img)[0]
         pred = non_max_suppression(pred, self.conf_thres, self.iou_thres, classes=self.classes,
                                    agnostic=self.agnostic_nms)
         for i, det in enumerate(pred):
