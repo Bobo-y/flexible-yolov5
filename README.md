@@ -36,6 +36,7 @@ The original Yolo V5 was an amazing project. For professionals, it should not be
 - CBAM, SE
 - DCN (mixed precision training not support, if you want use dcn, please close amp in line 292 of scripts/train.py)
 - coord conv
+- drop_block
 
 ## Notices
 
