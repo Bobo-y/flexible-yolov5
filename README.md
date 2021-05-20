@@ -22,6 +22,7 @@ The original Yolo V5 was an amazing project. For professionals, it should not be
     * [Dataset Preparation](#dataset-preparation)
     * [Training and Testing](#Training-and-Testing)
     * [Detection](#Detection)
+    * [Deploy](#Deploy)
 * [Reference](#Reference)
 
 
@@ -72,6 +73,11 @@ Same as [ultralytics/yolov5](https://github.com/ultralytics/yolov5)
 ### Detection
 
 see detector.py
+
+### Deploy
+
+For tf_serving or triton_server, you can set model.detection.export = False in scripts/deploy/export.py in line 50 to export an onnx model, A new output node will be added to combine the three detection output nodes into one.
+For Official tensorrt converter, you should set model.detection.export = True, because  ScatterND op not support by trt.
 
 ## Some results
 
