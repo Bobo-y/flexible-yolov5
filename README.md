@@ -83,6 +83,7 @@ For Official tensorrt converter, you should set model.detection.export = True, b
 
 [See](scripts/trt_quant/README)
 
+trt python infer demo scripts/trt_quant/trt_infer.py
 ## Some results
 
 I train yolo with backbone of  MobileNetV3, resnet50, shufflenet_v2_x1_0 on my dataset for person detection(27K images).
