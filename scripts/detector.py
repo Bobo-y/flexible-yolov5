@@ -1,4 +1,5 @@
 import sys
+
 sys.path.append('.')
 from od.models.modules.experimental import *
 from od.data.datasets import letterbox
@@ -122,3 +123,22 @@ class Detector(object):
                     else:
                         outputs_json[clas] = [[x_min, y_min, x_max, y_max, score]]
         return {'data': outputs_json}
+
+
+if __name__ == '__main__':
+
+    pt_path = ''
+    model = Detector(pt_path, None, 640, xcycwh=False)
+    imgs_root = ''
+    imgs = os.listdir(imgs_root)
+    save_dir = ''
+    if not os.path.exists(save_dir):
+        os.mkdir(save_dir)
+    for img in imgs:
+        im = cv2.imread(os.path.join(imgs_root, img))
+        bboxes, scores, ids = model.detect_image(im)
+        for idx in range(bboxes.shape[0]):
+            bbox = bboxes[idx].astype(int)
+            score = scores[idx]
+            cv2.rectangle(im, (bbox[0], bbox[1]), (bbox[2], bbox[3]), (0, 0, 255), 2, 1)
+        cv2.imwrite(os.path.join(save_dir, img), im)
