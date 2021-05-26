@@ -1,4 +1,4 @@
-yolov5 tensorrt int8 量化, 代码参考自 [nanodet_tensorrt_int8_tools](https://github.com/Wulingtian/nanodet_tensorrt_int8_tools)
+yolov5 tensorrt int8 or fp16 量化, 代码参考自 [nanodet_tensorrt_int8_tools](https://github.com/Wulingtian/nanodet_tensorrt_int8_tools)
 
 将onnx 模型进行float16 或者int8 量化
 
