@@ -81,6 +81,11 @@ For Official tensorrt converter, you should set model.detection.export = True, b
 
 #### Quantization
 
+You can directly quantify the onnx model
+
+```shell
+python scripts/trt_quant/convert_trt_quant.py  --img_dir  /XXXX/train/  --img_size 640 --batch_size 6 --batch 200 --onnx_model runs/train/exp1/weights/bast.onnx  --mode int8
+```
 [See](scripts/trt_quant/README)
 
 trt python infer demo scripts/trt_quant/trt_infer.py
