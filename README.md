@@ -35,7 +35,7 @@ The original Yolo V5 was an amazing project. For professionals, it should not be
 - efficientnet_b0 - efficientnet_b8, efficientnet_l2
 - hrnet 18,32,48
 - CBAM, SE
-- swin transformer
+- Swin transformer (please set half=False in scripts/eval.py and don't use model.half in train.py)
 - DCN (mixed precision training not support, if you want use dcn, please close amp in line 292 of scripts/train.py)
 - coord conv
 - drop_block
@@ -108,7 +108,7 @@ shufflenet_v2_x1_0:
 ## bugs
 
 - ~~resnet with dcn, training on gpu *RuntimeError: expected scalar type Half but found Float~~
-- swin-transformer, training is ok, but testing report *RuntimeError: expected object of scalar type Float but got scalar type Half for argument #2 'mat2' in call to_th_bmm_out in swin_trsansformer.py 143
+- ~~swin-transformer, training is ok, but testing report *RuntimeError: expected object of scalar type Float but got scalar type Half for argument #2 'mat2' in call to_th_bmm_out in swin_trsansformer.py 143~~
 ## Reference
 
 * [ultralytics/yolov5](https://github.com/ultralytics/yolov5)
