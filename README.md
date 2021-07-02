@@ -108,6 +108,7 @@ shufflenet_v2_x1_0:
 ## bugs
 
 - ~~resnet with dcn, training on gpu *RuntimeError: expected scalar type Half but found Float~~
+- swin-transformer, training is ok, but testing report *RuntimeError: expected object of scalar type Float but got scalar type Half for argument #2 'mat2' in call to_th_bmm_out in swin_trsansformer.py 143
 ## Reference
 
 * [ultralytics/yolov5](https://github.com/ultralytics/yolov5)
