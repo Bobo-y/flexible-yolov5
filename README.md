@@ -90,20 +90,7 @@ python scripts/trt_quant/convert_trt_quant.py  --img_dir  /XXXX/train/  --img_si
 [See](scripts/trt_quant/README)
 
 trt python infer demo scripts/trt_quant/trt_infer.py
-## Some results
 
-I train yolo with backbone of  MobileNetV3, resnet50, shufflenet_v2_x1_0 on my dataset for person detection(27K images).
-
-*For time reason, for each backbone, i only train 15 epochs, Here's the test comparison,*
-
-resnet50:
-![](images/resnet50.jpg)
-
-MobileNetV3:
-
-![](images/moblienetv3.jpg)
-shufflenet_v2_x1_0:
-![](images/shufflenet.jpg)
 
 ## bugs
 
