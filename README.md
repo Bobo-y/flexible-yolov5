@@ -105,4 +105,8 @@ trt python infer demo scripts/trt_quant/trt_infer.py
 * [hrnet](https://arxiv.org/abs/1908.07919)
 * [shufflenet](https://arxiv.org/abs/1707.01083)
 * [swin transformer](https://github.com/SwinTransformer/Swin-Transformer-Object-Detection)
-
+* [dcn-v2](https://github.com/jinfagang/DCNv2_latest)
+* [coord_conv](https://github.com/mkocabas/CoordConv-pytorch)
+* [triton server](https://github.com/triton-inference-server/server)
+* [drop_block](https://github.com/miguelvr/dropblock)
+* [trt quan](https://github.com/Wulingtian/nanodet_tensorrt_int8_tools)
