@@ -67,6 +67,8 @@ For training and Testing, it's same like yolov5.
 $ python scripts/train.py  --batch 16 --epochs 5 --data configs/data.yaml --cfg confgis/model_XXX.yaml
 ```
 
+A google colab demo in train_demo.ipynb
+
 ### Testing and Visualize
 Same as [ultralytics/yolov5](https://github.com/ultralytics/yolov5)
 
