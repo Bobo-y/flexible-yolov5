@@ -35,6 +35,8 @@ def convert_annotation(data_dir, image_id, train, classes):
     for obj in root.iter('object'):
         difficult = obj.find('difficult').text
         cls = obj.find('name').text
+        if cls not in classes:
+          continue
         cls_id = classes.index(cls)
         xmlbox = obj.find('bndbox')
         b = (float(xmlbox.find('xmin').text), float(xmlbox.find('xmax').text), float(xmlbox.find('ymin').text),
@@ -76,4 +78,4 @@ def transform_voc(data_dir, classes, c_year=None):
 if __name__ == '__main__':
     data_dir = ''
     classes = ['person']
-    transform_voc(data_dir, classes)
+    transform_voc(data_dir, classes, year)
