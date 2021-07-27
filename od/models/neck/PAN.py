@@ -31,8 +31,8 @@ class PAN(nn.Module):
             self.gd = gains[self.version.lower()]['gd']  # depth gain
             self.gw = gains[self.version.lower()]['gw']  # width gain
         else:
-            self.gd = 1
-            self.gw = 1
+            self.gd = 0.33
+            self.gw = 0.5
 
         self.channels_out = {
             'inner_p3': inner_p3,
