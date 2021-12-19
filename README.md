@@ -2,15 +2,13 @@
 
 Based on [ultralytics/yolov5](https://github.com/ultralytics/yolov5).
 
-The original Yolo V5 was an amazing project. For professionals, it should not be difficult to understand and modify its
- code. I'm not an expert. When I want to make some changes to the network, it's not so easy, such as adding branches and
+The original Yolo V5 was an amazing project. When I want to make some changes to the network, it's not so easy, such as adding branches and
   trying other backbones. Maybe there are people like me, so I split the yolov5 model to {backbone, neck, head} to 
   facilitate the operation of various modules and support more backbones.Basically, I only changed the model, and I 
   didn't change the architecture, training and testing of yolov5. Therefore, if the original code is updated, it is also
    very convenient to update this code. if this repo can help you, please give me a star.
 
-原始的yolov5是个了不起的开源项目。但是作者构建网络都是以解析config文件的形式进行，当然了，对于编码高手来说，理解、修改网络并不难, 对于我这种菜鸟来说, 以config 
-文件构建网络不太直观，魔改起来也很困难。因此，自己花了一点时间, 将YOLOv5的网络部分进行剥离, 参照主流的 pytorch 网络构建形式, 分成 backbone, neck, head
+原始的yolov5是个了不起的开源项目。但是作者构建网络都是以解析config文件的形式进行, 重构起来不太方便，自己花了一点时间, 将YOLOv5的网络部分进行剥离, 参照主流的 pytorch 网络构建形式, 分成 backbone, neck, head
 进行插件式构建, 实现支持 resnet, mobilenet, shufflenet, 当然了别的backbone也可以轻松的集成进去, 对于小模块, 如 SE, CBAM 集成也很方便. 本人基本只改了网络构建
 代码, 训练、测试、数据生成等基本没有大的改动. 注意: 由于整个代码结构改了, 所以暂时无法加载作者提供的预训练权重, 但是由于YOLOv5这个训练外壳设计的很好，即使没有预训练权重训练收敛也很快.
 
