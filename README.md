@@ -71,7 +71,21 @@ A google colab demo in train_demo.ipynb
 ### Testing and Visualize
 Same as [ultralytics/yolov5](https://github.com/ultralytics/yolov5)
 
+### Baseline Pretrained Checkpoints
 
+Because the training takes too much time, each model has only trained 150 epoch on coco2014. You can download it to continue training, and the model can continue to converge. The following model is different only from the backbone network, which is compared with yolov5s. The following table can be used as a performance comparison.
+
+*doing*
+
+|Model | size |mAP<sup>val<br>0.5:0.95| mAP<sup>val<br>0.5 |params|
+|---                    |---|---  |---    |---   |
+|[YOLOv5s][]      |640  |   | | 9543197| 
+|[mobilenetv3-small(https://pan.baidu.com/s/1zlgdZOGqeqKJhZSiyVAwYw)][qi77]      |640  |21   |37.6| 5360221
+|[shufflenetv2-x1_0][]      |640  |   | | |
+|[resnet-34][]      |640  |    | | |
+|[hrnet-18][]      |640  |    | | |
+|[SwinTransformer][]      |640  |   | | |
+|[efficientnet-b0][]      |640  |   | | |
 ### Detection
 
 see detector.py
