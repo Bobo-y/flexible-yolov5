@@ -1,0 +1,11 @@
+backbone:
+  type: vgg
+  version: 16_bn  # 11, 13, 16, 19, 11_bn, 13_bn, 16_bn, 19_bn
+  pretrained: False
+head:
+  nc: 1
+  stride: [8.0, 16.0, 32.0]
+  anchors:
+    - [10,13, 16,30, 33,23]  # P3/8
+    - [30,61, 62,45, 59,119]  # P4/16
+    - [116,90, 156,198, 373,326]  # P5/32
