@@ -8,10 +8,6 @@ The original Yolo V5 was an amazing project. When I want to make some changes to
   didn't change the architecture, training and testing of yolov5. Therefore, if the original code is updated, it is also
    very convenient to update this code. if this repo can help you, please give me a star.
 
-原始的yolov5是个了不起的开源项目。但是作者构建网络都是以解析config文件的形式进行, 重构起来不太方便，自己花了一点时间, 将YOLOv5的网络部分进行剥离, 参照主流的 pytorch 网络构建形式, 分成 backbone, neck, head
-进行插件式构建, 实现支持 resnet, mobilenet, shufflenet, 当然了别的backbone也可以轻松的集成进去, 对于小模块, 如 SE, CBAM 集成也很方便. 本人基本只改了网络构建
-代码, 训练、测试、数据生成等基本没有大的改动. 注意: 由于整个代码结构改了, 所以暂时无法加载作者提供的预训练权重, 但是由于YOLOv5这个训练外壳设计的很好，即使没有预训练权重训练收敛也很快.
-
 ## Table of contents
 * [Features](#features)
 * [Notices](#Notices)
