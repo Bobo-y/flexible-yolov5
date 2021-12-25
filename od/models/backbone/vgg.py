@@ -177,5 +177,3 @@ def vgg(pretrained=False, **kwargs):
         return vgg16_bn(pretrained, **kwargs)
     if version == '19_bn':
         return vgg19_bn(pretrained, **kwargs)
-
-vgg11_bn(pretrained=True)
