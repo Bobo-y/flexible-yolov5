@@ -5,13 +5,26 @@
 # Written by Ze Liu, Yutong Lin, Yixuan Wei
 # --------------------------------------------------------
 
+from sys import version
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import torch.utils.checkpoint as checkpoint
 import numpy as np
 from timm.models.layers import DropPath, to_2tuple, trunc_normal_
+import torch.utils.model_zoo as model_zoo
 
+__all__ = [
+    'small', 'base', 'tiny'
+]
+
+
+model_urls = {
+    'base': 'https://github.com/SwinTransformer/storage/releases/download/v1.0.0/swin_base_patch4_window7_224.pth',
+    'tiny': 'https://github.com/SwinTransformer/storage/releases/download/v1.0.0/swin_tiny_patch4_window7_224.pth',
+    'small': 'https://github.com/SwinTransformer/storage/releases/download/v1.0.0/swin_small_patch4_window7_224.pth',
+    'large': 'https://github.com/SwinTransformer/storage/releases/download/v1.0.0/swin_large_patch4_window7_224_22kto1k.pth'
+}
 
 class Mlp(nn.Module):
     """ Multilayer perceptron."""
@@ -610,3 +623,44 @@ class SwinTransformer(nn.Module):
         """Convert the model into training mode while keep layers freezed."""
         super(SwinTransformer, self).train(mode)
         self._freeze_stages()
+
+
+def swin_transformer(pretrained=False, **kwargs):
+    version = str(kwargs.pop('version'))
+    if version == 'tiny':
+        model =  SwinTransformer(
+            embed_dim=96,
+            depths=[2, 2, 6, 2],
+            num_heads=[3, 6, 12, 24],
+            window_size=7,
+            drop_path_rate=0.0
+        )
+
+    if version == 'small':
+        model =  SwinTransformer(
+            embed_dim=96,
+            depths=[2, 2, 18, 2],
+            num_heads=[3, 6, 12, 24],
+            window_size=7
+        )
+
+    if version == 'base':
+        model =  SwinTransformer(
+            embed_dim=128,
+            depths=[2, 2, 18, 2],
+            num_heads=[4, 8, 16, 32],
+            window_size=7,
+            drop_path_rate=0.4
+        )
+
+    if version == 'large':
+        model =  SwinTransformer(
+            embed_dim=192,
+            depths=[2, 2, 18, 2],
+            num_heads=[6, 12, 24, 48],
+            window_size=7,
+            drop_path_rate=0.2
+        )
+    if pretrained:
+        model.load_state_dict(model_zoo.load_url(model_urls[version], model_dir='.'), strict=False)
+    return model

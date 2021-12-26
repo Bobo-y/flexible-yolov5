@@ -1,5 +1,6 @@
 backbone:
-  type: SwinTransformer
+  type: swin
+  version: tiny # tiny small base  large
 head:
   nc: 1
   stride: [8.0, 16.0, 32.0]
