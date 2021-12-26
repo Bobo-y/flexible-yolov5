@@ -75,14 +75,14 @@ Because the training takes too much time, each model has only trained 150 epoch 
 
 |Model | size |mAP<sup>val<br>0.5:0.95| mAP<sup>val<br>0.5 |params|
 |---                    |---|---  |---    |---   |
-|[YOLOv5s](https://pan.baidu.com/s/1-moalZw1OxDwTM1_U1CLPw)[7vuv]      |640  |31.3| 51.4| 9543197| 
-|[mobilenetv3-small](https://pan.baidu.com/s/1zlgdZOGqeqKJhZSiyVAwYw)[qi77]      |640  |21   |37.6| 5360221
-|[shufflenetv2-x1_0][]      |640  |   | | |
-|[resnet-18][]      |640  |    | | |
-|[hrnet-18][]      |640  |    | | |
-|[vgg-16_bn][]      |640  |    | | |
-|[swin-tiny][]      |640  |   | | |
-|[efficientnet-b0][]      |640  |   | | |
+|[YOLOv5s](https://pan.baidu.com/s/1-moalZw1OxDwTM1_U1CLPw)[提取码: 7vuv]                |640    |31.3  | 51.4| 9543197| 
+|[mobilenetv3-small](https://pan.baidu.com/s/1zlgdZOGqeqKJhZSiyVAwYw)[提取码: qi77]      |640    |21    |37.6 | 5360221|
+|[shufflenetv2-x1_0](https://pan.baidu.com/s/1mxRYd8TnFHxRHhl8WHELdA)[提取码: e3jk]      |640    |27    |45.9 | 6660449|
+|[resnet-18][]                                                                   |640    |      |     |        |
+|[hrnet-18][]                                                                    |640    |      |     |        |
+|[vgg-16_bn][]                                                                   |640    |      |     |        |
+|[swin-tiny][]                                                                   |640    |      |     |        |
+|[efficientnet-b0][]                                                             |640    |      |     |        |
 ### Detection
 
 see detector.py
