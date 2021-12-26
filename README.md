@@ -81,7 +81,7 @@ Because the training takes too much time, each model has only trained 150 epoch 
 |[resnet-18][]      |640  |    | | |
 |[hrnet-18][]      |640  |    | | |
 |[vgg-16_bn][]      |640  |    | | |
-|[SwinTransformer][]      |640  |   | | |
+|[swin-tiny][]      |640  |   | | |
 |[efficientnet-b0][]      |640  |   | | |
 ### Detection
 
