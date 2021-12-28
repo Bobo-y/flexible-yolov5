@@ -71,14 +71,17 @@ Same as [ultralytics/yolov5](https://github.com/ultralytics/yolov5)
 
 Because the training takes too much time, each model has only trained 150 epoch on coco2014. You can download it to continue training, and the model can continue to converge. The following model is different only from the backbone network, which is compared with yolov5s. The following table can be used as a performance comparison.
 
+All model in BaiduNetDisk.
+
 *doing*
 
 |Model | size |mAP<sup>val<br>0.5:0.95| mAP<sup>val<br>0.5 |params|
 |---                    |---|---  |---    |---   |
-|[YOLOv5s](https://pan.baidu.com/s/1-moalZw1OxDwTM1_U1CLPw)[提取码: 7vuv]                |640    |31.3  | 51.4| 9543197| 
+|[YOLOv5s](https://pan.baidu.com/s/1-moalZw1OxDwTM1_U1CLPw)[提取码: 7vuv]                |640    |31.3  | 51.4| 9543197|
+|[YOLOv5s_c3tr]()[提取码: ]                |640    |  | | |
 |[mobilenetv3-small](https://pan.baidu.com/s/1zlgdZOGqeqKJhZSiyVAwYw)[提取码: qi77]      |640    |21    |37.6 | 5360221|
 |[shufflenetv2-x1_0](https://pan.baidu.com/s/1mxRYd8TnFHxRHhl8WHELdA)[提取码: e3jk]      |640    |27    |45.9 | 6660449|
-|[resnet-18][]                                                                   |640    |      |     |        |
+|[resnet-18](https://pan.baidu.com/s/1W-M2fX8UeCLr1s_spoT01g)[提取码:1ovj]                                                                   |640    |   30   |   49.6  |   14301501     |
 |[hrnet-18][]                                                                    |640    |      |     |        |
 |[vgg-16_bn][]                                                                   |640    |      |     |        |
 |[swin-tiny][]                                                                   |640    |      |     |        |
