@@ -33,6 +33,7 @@ The original Yolo V5 was an amazing project. When I want to make some changes to
 - DCN (mixed precision training not support, if you want use dcn, please close amp in line 292 of scripts/train.py)
 - coord conv
 - drop_block
+- vgg, repvgg
 
 ## Notices
 
@@ -86,6 +87,7 @@ All model in BaiduNetDisk.
 |[vgg-16_bn][]                                                                   |640    |      |     |        |
 |[swin-tiny][]                                                                   |640    |      |     |        |
 |[efficientnet-b0][]                                                             |640    |      |     |        |
+|[repvgg-A0][]                                                             |640    |      |     |        |
 ### Detection
 
 see detector.py
@@ -126,3 +128,4 @@ trt python infer demo scripts/trt_quant/trt_infer.py
 * [triton server](https://github.com/triton-inference-server/server)
 * [drop_block](https://github.com/miguelvr/dropblock)
 * [trt quan](https://github.com/Wulingtian/nanodet_tensorrt_int8_tools)
+* [repvgg](https://github.com/DingXiaoH/RepVGG)
