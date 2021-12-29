@@ -66,7 +66,10 @@ $ python scripts/train.py  --batch 16 --epochs 5 --data configs/data.yaml --cfg 
 A google colab demo in train_demo.ipynb
 
 ### Testing and Visualize
-Same as [ultralytics/yolov5](https://github.com/ultralytics/yolov5)
+
+```shell script
+$ python scripts/eval.py   --data configs/data.yaml  --weights runs/train/yolo/weights/best.py
+```
 
 ### Baseline Pretrained Checkpoints
 
