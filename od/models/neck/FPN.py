@@ -17,7 +17,7 @@ class PyramidFeatures(nn.Module):
     C5 --->    P5
     """
 
-    def __init__(self, C3_size=256, C4_size=512, C5_size=512, inner_p4=512, outer_p4=256, version='L'):
+    def __init__(self, C3_size=256, C4_size=512, C5_size=512, inner_p4=512, outer_p4=256, version='S'):
         super(PyramidFeatures, self).__init__()
         self.C3_size = C3_size
         self.C4_size = C4_size

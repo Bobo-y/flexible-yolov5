@@ -18,7 +18,7 @@ class PAN(nn.Module):
     P5 --->  PP5
     """
 
-    def __init__(self, P3_size=512, P4_size=256, P5_size=512, inner_p3=256, inner_p4=512, inner_p5=1024, version='L'):
+    def __init__(self, P3_size=512, P4_size=256, P5_size=512, inner_p3=256, inner_p4=512, inner_p5=1024, version='S'):
         super(PAN, self).__init__()
         self.version = str(version)
         gains = {'s': {'gd': 0.33, 'gw': 0.5},

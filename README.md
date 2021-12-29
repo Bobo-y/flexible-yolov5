@@ -38,7 +38,7 @@ The original Yolo V5 was an amazing project. When I want to make some changes to
 ## Notices
 
 * The CBAM, SE, DCN, coord conv. At present, the above plug-ins are not added to all networks, so you may need to modify the code yourself.
-* The default gw and gd for PAN and FPN of other backbone are same as yolov5_L, so if you want a smaller and faster model, please modify self.gw and self.gd in FPN and PAN.
+* The default gw and gd for PAN and FPN of other backbone are same as yolov5_s, so if you want a strong model, please modify self.gw and self.gd in FPN and PAN.
 
 ## Prerequisites
 
