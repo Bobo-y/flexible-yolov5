@@ -7,10 +7,11 @@ from .efficientnet import efficientnet
 from .hrnet import hrnet
 from .swin_transformer import swin_transformer as swin
 from .vgg import vgg
+from .repvgg import repvgg
 
 __all__ = ['build_backbone']
 
-support_backbone = ['resnet', 'shufflenetv2', 'mobilenetv3', 'YOLOv5', 'efficientnet', 'hrnet', 'swin', 'vgg']
+support_backbone = ['resnet', 'shufflenetv2', 'mobilenetv3', 'YOLOv5', 'efficientnet', 'hrnet', 'swin', 'vgg', 'repvgg']
 
 
 def build_backbone(backbone_name, **kwargs):
