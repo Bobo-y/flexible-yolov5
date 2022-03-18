@@ -9,7 +9,7 @@ from utils.torch_utils import *
 
 
 class Detector(object):
-    def __init__(self, pt_path, namesfile, img_size, conf_thres=0.4, iou_thres=0.3, classes=0, agnostic_nms=False,
+    def __init__(self, pt_path, img_size, conf_thres=0.4, iou_thres=0.3, classes=0, agnostic_nms=False,
                  xcycwh=True, device=0):
         self.pt_path = pt_path
         self.img_size = img_size
@@ -20,16 +20,10 @@ class Detector(object):
         self.classes = classes
         self.agnostic_nms = agnostic_nms
         self.xcycwh = xcycwh
-        self.class_names = self.load_class_names(namesfile)
 
     def load_model(self):
         model = attempt_load(self.pt_path, map_location=self.device)  # load FP32 model
         return model
-
-    def load_class_names(self, namesfile):
-        with open(namesfile, 'r', encoding='utf8') as fp:
-            class_names = [line.strip() for line in fp.readlines()]
-        return class_names
 
     def __call__(self, ori_img, split_width=1, split_height=1):
         if split_width == 1 and split_height == 1:
@@ -128,7 +122,7 @@ class Detector(object):
 if __name__ == '__main__':
 
     pt_path = ''
-    model = Detector(pt_path, None, 640, xcycwh=False)
+    model = Detector(pt_path, 640, xcycwh=False)
     imgs_root = ''
     imgs = os.listdir(imgs_root)
     save_dir = ''
