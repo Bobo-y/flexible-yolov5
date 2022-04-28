@@ -71,26 +71,69 @@ A google colab demo in train_demo.ipynb
 $ python scripts/eval.py   --data configs/data.yaml  --weights runs/train/yolo/weights/best.py
 ```
 
-### Baseline Pretrained Checkpoints
+### Model performance comparison 
 
-Because the training takes too much time, each model has only trained 150 epoch on coco2014. You can download it to continue training, and the model can continue to converge. The following model is different only from the backbone network, which is compared with yolov5s. The following table can be used as a performance comparison.
+Because the training takes too much time, each model has only trained 150 epoch on coco2014. You can download it to continue training, and the model can continue to converge. The following model is different only from the backbone network, which is compared with yolov5s. The following table can be used as a performance comparison. But the results may not reflect the performance of the model correctly. For reference only.
 
-All model in BaiduNetDisk.
 
-*doing*
 
-|Model | size |mAP<sup>val<br>0.5:0.95| mAP<sup>val<br>0.5 |params|
-|---                    |---|---  |---    |---   |
-|[YOLOv5s](https://pan.baidu.com/s/1-moalZw1OxDwTM1_U1CLPw)[提取码: 7vuv]                |640    |31.3  | 51.4| 9543197|
-|[YOLOv5s_c3tr](https://pan.baidu.com/s/16ufDZytjJyj81aBdrW5lTA)[提取码: oph6]           |640    | 29 | 49.1| 7264669|
-|[mobilenetv3-small](https://pan.baidu.com/s/1zlgdZOGqeqKJhZSiyVAwYw)[提取码: qi77]      |640    |21    |37.6 | 5360221|
-|[shufflenetv2-x1_0](https://pan.baidu.com/s/1mxRYd8TnFHxRHhl8WHELdA)[提取码: e3jk]      |640    |27    |45.9 | 6660449|
-|[resnet-18](https://pan.baidu.com/s/1W-M2fX8UeCLr1s_spoT01g)[提取码:1ovj]                                                                   |640    |   30   |   49.6  |   14301501     |
-|[hrnet-18][]                                                                    |640    |      |     |        |
-|[vgg-16_bn][]                                                                   |640    |      |     |        |
-|[swin-tiny][]                                                                   |640    |      |     |        |
-|[efficientnet-b0][]                                                             |640    |      |     |        |
-|[repvgg-A0](https://pan.baidu.com/s/1Oyt4opFxTLwyCD1vMTBVWg)[提取码: 6sok]  |640    |0.2927|0.4834|     11526269  |
+
+------------------------------
+
+efficientnet-b0[链接: https://pan.baidu.com/s/1DdghRgq28g6p01ilS6x2AQ 提取码: 7w6m 
+--来自百度网盘超级会员v4的分享]
+
+![](images/effi_PR_curve.png)
+
+hrnet-18[链接: https://pan.baidu.com/s/1u64w5nk7QDxjYHkArV7OWw 提取码: ka9g 
+--来自百度网盘超级会员v4的分享]
+![](images/hr18_PR_curve.png)
+
+mobilenet-v3-small[链接: https://pan.baidu.com/s/1kKMHK9eKVh-p383qaAxIWg 提取码: j4he 
+--来自百度网盘超级会员v4的分享]
+![](images/mobile_PR_curve.png)
+
+repvgg-A0[链接: https://pan.baidu.com/s/1bxn0H_fGGguYQe7UJOjB6g 提取码: hsk3 
+--来自百度网盘超级会员v4的分享]
+![](images/repvgg_PR_curve.png)
+
+resnet18[链接: https://pan.baidu.com/s/1OPu7RE0N6QlqWk80Ed5zkg 提取码: anpp 
+--来自百度网盘超级会员v4的分享]
+![](images/resnet_PR_curve.png)
+
+resnet18-cbam[链接: https://pan.baidu.com/s/1OPu7RE0N6QlqWk80Ed5zkg 提取码: anpp 
+--来自百度网盘超级会员v4的分享]
+![](images/resnetcbam_PR_curve.png)
+
+resnet18-dcn[链接: https://pan.baidu.com/s/1lUg8SGAOa0K-PH2mDCil7Q 提取码: sbs5 
+--来自百度网盘超级会员v4的分享]
+![](images/resnetdcn_PR_curve.png)
+
+resnet18-dropblock[链接: https://pan.baidu.com/s/1lUg8SGAOa0K-PH2mDCil7Q 提取码: sbs5 
+--来自百度网盘超级会员v4的分享]
+![](images/resnetdrop_PR_curve.png)
+
+shufflenetv2_x0.5[链接: https://pan.baidu.com/s/1KKtPn4pQjOI8iDhlGrp5kg 提取码: d8h8 
+--来自百度网盘超级会员v4的分享]
+![](images/shuffle_PR_curve.png)
+
+swin-tiny[链接: https://pan.baidu.com/s/15ecdj2O3a-U6FD9zh0d2bA 提取码: v9i4 
+--来自百度网盘超级会员v4的分享]
+![](images/swin_PR_curve.png)
+
+vgg-16bn[链接: https://pan.baidu.com/s/1TN6Lobi3ORrbQKbWlxVdTQ 提取码: nqv2 
+--来自百度网盘超级会员v4的分享]
+![](images/vgg_PR_curve.png)
+
+yolov5s[链接: https://pan.baidu.com/s/1Mc1J4t03qrslj1mywaWqBw 提取码: chtr 
+--来自百度网盘超级会员v4的分享]
+![](images/yolo5s_PR_curve.png)
+
+yolov5s-c3tr[链接: https://pan.baidu.com/s/14komD827Mal8rX-0YiHIoQ 提取码: clo1 
+--来自百度网盘超级会员v4的分享]
+![](images/yolo5sc3tr_PR_curve.png)
+
+--------------------------
 ### Detection
 
 see detector.py

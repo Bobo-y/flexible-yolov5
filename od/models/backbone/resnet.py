@@ -1,7 +1,7 @@
 import torch.nn as nn
 import math
 import torch.utils.model_zoo as model_zoo
-from od.models.modules.cbam import CBAM
+from od.models.modules import CBAM,  DropBlock2D, LinearScheduler
 
 
 model_urls = {
@@ -138,18 +138,26 @@ class Bottleneck(nn.Module):
 
 class Resnet(nn.Module):
 
-    def __init__(self, block, layers, cbam=False, dcn=False):
+    def __init__(self, block, layers, cbam=False, dcn=False, drop_prob=0):
         super(Resnet, self).__init__()
         self.inplanes = 64
         self.dcn = dcn
         self.cbam = cbam
+        self.drop = drop_prob != 0
         self.conv1 = nn.Conv2d(3, 64, kernel_size=7, stride=2, padding=3, bias=False)
         self.bn1 = nn.BatchNorm2d(64)
         self.relu = nn.ReLU(inplace=True)
         self.out_channels = []
         self.maxpool = nn.MaxPool2d(kernel_size=3, stride=2, padding=1)
+        if self.drop:
+            self.dropblock = LinearScheduler(
+                DropBlock2D(drop_prob=drop_prob, block_size=5),
+                start_value=0.,
+                stop_value=drop_prob,
+                nr_steps=5e3
+            )
         self.layer1 = self._make_layer(block, 64, layers[0])
-        self.layer2 = self._make_layer(block, 128, layers[1], stride=2, cbam=self.cbam, dcn=dcn)
+        self.layer2 = self._make_layer(block, 128, layers[1], stride=2, cbam=self.cbam)
         self.layer3 = self._make_layer(block, 256, layers[2], stride=2, cbam=self.cbam, dcn=dcn)
         self.layer4 = self._make_layer(block, 512, layers[3], stride=2, cbam=self.cbam, dcn=dcn)
 
@@ -203,9 +211,12 @@ class Resnet(nn.Module):
         x = self.bn1(x)
         x = self.relu(x)
         x = self.maxpool(x)
-
-        x1 = self.layer1(x)
-        x2 = self.layer2(x1)
+        if self.drop:
+            x1 = self.dropblock(self.layer1(x))
+            x2 = self.dropblock(self.layer2(x1))
+        else:
+            x1 = self.layer1(x)
+            x2 = self.layer2(x1)
         x3 = self.layer3(x2)
         x4 = self.layer4(x3)
 
