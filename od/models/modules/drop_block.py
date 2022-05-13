@@ -5,6 +5,8 @@ code from https://github.com/miguelvr/dropblock/blob/master/dropblock/dropblock.
 import torch
 import torch.nn.functional as F
 from torch import nn
+import numpy as np
+
 
 
 class DropBlock2D(nn.Module):
@@ -73,3 +75,20 @@ class DropBlock2D(nn.Module):
 
     def _compute_gamma(self, x):
         return self.drop_prob / (self.block_size ** 2)
+
+
+class LinearScheduler(nn.Module):
+    def __init__(self, dropblock, start_value, stop_value, nr_steps):
+        super(LinearScheduler, self).__init__()
+        self.dropblock = dropblock
+        self.i = 0
+        self.drop_values = np.linspace(start=start_value, stop=stop_value, num=int(nr_steps))
+
+    def forward(self, x):
+        return self.dropblock(x)
+
+    def step(self):
+        if self.i < len(self.drop_values):
+            self.dropblock.drop_prob = self.drop_values[self.i]
+
+        self.i += 1

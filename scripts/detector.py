@@ -1,5 +1,5 @@
 import sys
-
+import argparse
 sys.path.append('.')
 from od.models.modules.experimental import *
 from od.data.datasets import letterbox
@@ -9,11 +9,11 @@ from utils.torch_utils import *
 
 
 class Detector(object):
-    def __init__(self, pt_path, img_size, conf_thres=0.4, iou_thres=0.3, classes=0, agnostic_nms=False,
+    def __init__(self, pt_path, img_size, conf_thres=0.4, iou_thres=0.3, classes=None, agnostic_nms=False,
                  xcycwh=True, device=0):
         self.pt_path = pt_path
         self.img_size = img_size
-        self.device = torch.device('cuda:{}'.format(device))
+        self.device = torch.device('cuda:{}'.format(device)) if torch.cuda.is_available() else torch.device('cpu')
         self.model = self.load_model()
         self.conf_thres = conf_thres
         self.iou_thres = iou_thres
@@ -120,12 +120,22 @@ class Detector(object):
 
 
 if __name__ == '__main__':
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--weights', type=str, default='./weights/hrnet18.pt', help='weights path')
+    parser.add_argument('--imgs_root', type=str, default='test_imgs', help='test images root')
+    parser.add_argument('--save_dir', type=str, default='./results', help='save result dir')
+    parser.add_argument('--xcycwh', type=bool, default=False, help='box format')
+    parser.add_argument('--img_size', type=int, default=640, help='test image size')
+    parser.add_argument('--conf_thresh', type=float, default=0.4, help='confidence thresh')
+    parser.add_argument('--iou_thresh', type=float, default=0.3, help='nms iou thresh')
+    parser.add_argument('--filter_class', type=int, default=None, help='filter specify class id')
 
-    pt_path = ''
-    model = Detector(pt_path, 640, xcycwh=False)
-    imgs_root = ''
+    opt = parser.parse_args()
+    pt_path = opt.weights
+    model = Detector(pt_path, opt.img_size, conf_thres=opt.conf_thresh, iou_thres=opt.iou_thresh, classes=opt.filter_class, xcycwh=opt.xcycwh)
+    imgs_root = opt.imgs_root
     imgs = os.listdir(imgs_root)
-    save_dir = ''
+    save_dir = opt.save_dir
     if not os.path.exists(save_dir):
         os.mkdir(save_dir)
     for img in imgs:

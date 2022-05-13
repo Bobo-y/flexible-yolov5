@@ -1,3 +1,5 @@
 .idea/*
 __pycache__/
 utils/PaxHeader/
+results/
+weights/

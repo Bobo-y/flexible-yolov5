@@ -1,6 +1,6 @@
 backbone:
   type: mobilenetv3
-  version: large # or small
+  version: small # or small
 head:
   nc: 1
   stride: [8.0, 16.0, 32.0]

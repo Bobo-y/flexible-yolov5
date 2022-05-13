@@ -1,6 +1,6 @@
 backbone:
   type: resnet
-  version: 50  # 18, 34, 50, 101, 152
+  version: '18'  # 18, 34, 50, 101, 152
   dcn: False
   cbam: False
 head:

@@ -1,8 +1,8 @@
 backbone:
   type: efficientnet
-  version: b8 # b1 to b8 and l2
+  version: b1 # b1 to b8 and l2
 head:
-  nc: 1
+  nc: 80
   stride: [8.0, 16.0, 32.0]
   anchors:
     - [10,13, 16,30, 33,23]  # P3/8
