@@ -2,11 +2,7 @@
 
 Based on [ultralytics/yolov5](https://github.com/ultralytics/yolov5).
 
-The original Yolo V5 was an amazing project. When I want to make some changes to the network, it's not so easy, such as adding branches and
-  trying other backbones. Maybe there are people like me, so I split the yolov5 model to {backbone, neck, head} to 
-  facilitate the operation of various modules and support more backbones.Basically, I only changed the model, and I 
-  didn't change the architecture, training and testing of yolov5. Therefore, if the original code is updated, it is also
-   very convenient to update this code. if this repo can help you, please give me a star.
+The original Yolo V5 was an amazing project. When I want to make some changes to the network, it's not so easy, such as adding branches and trying other backbones. Maybe there are people like me, so I split the yolov5 model to {backbone, neck, head} to facilitate the operation of various modules and support more backbones.Basically, I only changed the model, and I didn't change the architecture, training and testing of yolov5. Therefore, if the original code is updated, it is also very convenient to update this code. if this repo can help you, please give me a star. This repo mainly depend on origin yolov5 release 5.0 !!!
 
 ## Table of contents
 * [Features](#features)
