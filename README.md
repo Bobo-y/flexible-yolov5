@@ -56,7 +56,7 @@ For training and Testing, it's same like yolov5.
 2. check out configs/model_*.yaml, choose backbone. and change nc to your dataset. please refer support_backbone in models.backbone.__init__.py
 3. 
 ```shell script
-$ python scripts/train.py  --batch 16 --epochs 5 --data configs/data.yaml --cfg confgis/model_XXX.yaml
+$ python scripts/train.py  --batch 16 --epochs 5 --data configs/data.yaml --cfg configs/model_XXX.yaml
 ```
 
 A google colab demo in train_demo.ipynb
