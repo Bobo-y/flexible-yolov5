@@ -1,7 +1,6 @@
 backbone:
   type: YOLOv5
   version: s # x, m, l ,x
-  focus: True
   with_C3TR: False
 head:
   nc: 1
