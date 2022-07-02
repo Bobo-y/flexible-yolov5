@@ -1,79 +1,73 @@
 import torch.nn as nn
-from od.models.modules.common import Focus, Conv, C3, SPP, BottleneckCSP, C3TR
+from od.models.modules.common import Conv, C3, SPPF, C3TR
 from utils.general import make_divisible
 
 
 class YOLOv5(nn.Module):
-    def __init__(self, focus=True, version='L', with_C3TR=False):
+    def __init__(self, version='S', with_C3TR=False):
         super(YOLOv5, self).__init__()
         self.version = version
-        self.with_focus = focus
         self.with_c3tr = with_C3TR
-        gains = {'s': {'gd': 0.33, 'gw': 0.5},
-                 'm': {'gd': 0.67, 'gw': 0.75},
-                 'l': {'gd': 1, 'gw': 1},
-                 'x': {'gd': 1.33, 'gw': 1.25}}
+        gains = {
+                'n': {'gd': 0.33, 'gw': 0.25},
+                's': {'gd': 0.33, 'gw': 0.5},
+                'm': {'gd': 0.67, 'gw': 0.75},
+                'l': {'gd': 1, 'gw': 1},
+                'x': {'gd': 1.33, 'gw': 1.25}}
+
         self.gd = gains[self.version.lower()]['gd']  # depth gain
         self.gw = gains[self.version.lower()]['gw']  # width gain
 
-        self.channels_out = {
-            'stage1': 64,
-            'stage2_1': 128,
-            'stage2_2': 128,
-            'stage3_1': 256,
-            'stage3_2': 256,
-            'stage4_1': 512,
-            'stage4_2': 512,
-            'stage5': 1024,
-            'spp': 1024,
-            'csp1': 1024,
-            'conv1': 512
-        }
+        self.channels_out = [64, 128, 128, 256, 256, 512, 512, 1024, 1024, 1024]
+
         self.re_channels_out()
 
-        if self.with_focus:
-            self.stage1 = Focus(3, self.channels_out['stage1'])
-        else:
-            self.stage1 = Conv(3, self.channels_out['stage1'], 3, 2)
+        self.C1 = Conv(3, self.channels_out[0], 6, 2, 2)
 
-        # for latest yolov5, you can change BottleneckCSP to C3
-        self.stage2_1 = Conv(self.channels_out['stage1'], self.channels_out['stage2_1'], k=3, s=2)
-        self.stage2_2 = C3(self.channels_out['stage2_1'], self.channels_out['stage2_2'], self.get_depth(3))
-        self.stage3_1 = Conv(self.channels_out['stage2_2'], self.channels_out['stage3_1'], 3, 2)
-        self.stage3_2 = C3(self.channels_out['stage3_1'], self.channels_out['stage3_2'], self.get_depth(9))
-        self.stage4_1 = Conv(self.channels_out['stage3_2'], self.channels_out['stage4_1'], 3, 2)
-        self.stage4_2 = C3(self.channels_out['stage4_1'], self.channels_out['stage4_2'], self.get_depth(9))
-        self.stage5 = Conv(self.channels_out['stage4_2'], self.channels_out['stage5'], 3, 2)
-        self.spp = SPP(self.channels_out['stage5'], self.channels_out['spp'], [5, 9, 13])
+        self.C2  = Conv(self.channels_out[0], self.channels_out[1], k=3, s=2)
+        self.conv1 = C3(self.channels_out[1], self.channels_out[2], self.get_depth(3))
+
+        self.C3 = Conv(self.channels_out[2], self.channels_out[3], 3, 2)
+        self.conv2 = C3(self.channels_out[3], self.channels_out[4], self.get_depth(6))
+
+        self.C4 = Conv(self.channels_out[4], self.channels_out[5], 3, 2)
+        self.conv3 = C3(self.channels_out[5], self.channels_out[6], self.get_depth(9))
+
+        self.C5 = Conv(self.channels_out[6], self.channels_out[7], 3, 2)
+
         if self.with_c3tr:
-            self.c3tr = C3TR(self.channels_out['spp'], self.channels_out['csp1'], self.get_depth(3), False)
+            self.conv4 = C3TR(self.channels_out[7], self.channels_out[8], self.get_depth(3))
         else:
-            self.csp1 = C3(self.channels_out['spp'], self.channels_out['csp1'], self.get_depth(3), False)
-        self.conv1 = Conv(self.channels_out['csp1'], self.channels_out['conv1'], 1, 1)
-        self.out_shape = {'C3_size': self.channels_out['stage3_2'],
-                          'C4_size': self.channels_out['stage4_2'],
-                          'C5_size': self.channels_out['conv1']}
-        print("backbone output channel: C3 {}, C4 {}, C5 {}".format(self.channels_out['stage3_2'],
-                                                                    self.channels_out['stage4_2'],
-                                                                    self.channels_out['conv1']))
+            self.conv4 = C3(self.channels_out[7], self.channels_out[8], self.get_depth(3))
+
+        self.sppf = SPPF(self.channels_out[8], self.channels_out[9], 5)
+        
+        self.out_shape = {'C3_size': self.channels_out[3],
+                          'C4_size': self.channels_out[5],
+                          'C5_size': self.channels_out[9]}
+
+        print("backbone output channel: C3 {}, C4 {}, C5(SPPF) {}".format(self.channels_out[3],
+                                                                    self.channels_out[5],
+                                                                    self.channels_out[9]))
 
     def forward(self, x):
-        x = self.stage1(x)
-        x21 = self.stage2_1(x)
-        x22 = self.stage2_2(x21)
-        x31 = self.stage3_1(x22)
-        c3 = self.stage3_2(x31)
-        x41 = self.stage4_1(c3)
-        c4 = self.stage4_2(x41)
-        x5 = self.stage5(c4)
-        spp = self.spp(x5)
-        if not self.with_c3tr:
-            csp1 = self.csp1(spp)
-            c5 = self.conv1(csp1)
-        else:
-            c3tr = self.c3tr(spp)
-            c5 = self.conv1(c3tr)
-        return c3, c4, c5
+        c1 = self.C1(x)
+
+        c2 = self.C2(c1)
+        conv1 = self.conv1(c2)
+
+        c3 = self.C3(conv1)
+        conv2 = self.conv2(c3)
+
+        c4 = self.C4(conv2)
+        conv3 = self.conv3(c4)
+
+        c5 = self.C5(conv3)
+        conv4 = self.conv4(c5)
+
+        sppf = self.sppf(conv4)
+
+        return c3, c4, sppf
 
     def get_depth(self, n):
         return max(round(n * self.gd), 1) if n > 1 else n
@@ -82,5 +76,5 @@ class YOLOv5(nn.Module):
         return make_divisible(n * self.gw, 8)
 
     def re_channels_out(self):
-        for k, v in self.channels_out.items():
-            self.channels_out[k] = self.get_width(v)
+        for idx, channel_out in enumerate(self.channels_outs):
+            self.channels_outs[idx] = self.get_width(channel_out)

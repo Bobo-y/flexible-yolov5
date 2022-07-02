@@ -22,7 +22,7 @@ class Detector(object):
         self.xcycwh = xcycwh
 
     def load_model(self):
-        model = attempt_load(self.pt_path, map_location=self.device)  # load FP32 model
+        model = attempt_load(self.pt_path).to(self.device)  # load FP32 model
         return model
 
     def __call__(self, ori_img, split_width=1, split_height=1):
@@ -60,12 +60,11 @@ class Detector(object):
         img = np.ascontiguousarray(img)
         img = torch.from_numpy(img).to(self.device)
         img = img.float()
-        img /= 255.0
+        img /= 255
         if img.ndimension() == 3:
             img = img.unsqueeze(0)
         pred = self.model(img)[0]
-        pred = non_max_suppression(pred, self.conf_thres, self.iou_thres, classes=self.classes,
-                                   agnostic=self.agnostic_nms)
+        pred = non_max_suppression(pred, self.conf_thres, self.iou_thres, labels=[], multi_label=True, agnostic=False)
         for i, det in enumerate(pred):
             if det is not None and len(det):
                 det[:, :4] = scale_coords(img.shape[2:], det[:, :4], im0s.shape).round()

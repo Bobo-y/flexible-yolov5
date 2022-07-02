@@ -1,8 +1,10 @@
-## flexible-yolov5
+# flexible-yolov5
 
-Mainly based on [ultralytics/yolov5](https://github.com/ultralytics/yolov5) 5.x. The 6.x is coming.
 
-The original Yolo V5 was an amazing project. When I want to make some changes to the network, it's not so easy, such as adding branches and trying other backbones. Maybe there are people like me, so I split the yolov5 model to {backbone, neck, head} to facilitate the operation of various modules and support more backbones.Basically, I only changed the model, and I didn't change the architecture, training and testing of yolov5. Therefore, if the original code is updated, it is also very convenient to update this code. if this repo can help you, please give me a star. This repo mainly depend on origin yolov5 release 5.0 !!!
+*I update the code for  [ultralytics/yolov5](https://github.com/ultralytics/yolov5) version 6.1+.*
+---
+
+The original Yolo V5 was an amazing project. When I want to make some changes to the network, it's not so easy, such as adding branches and trying other backbones. Maybe there are people like me, so I split the yolov5 model to {backbone, neck, head} to facilitate the operation of various modules and support more backbones.Basically, I only changed the model, and I didn't change the architecture, training and testing of yolov5. Therefore, if the original code is updated, it is also very convenient to update this code. if this repo can help you, please give me a star.
 
 ## Table of contents
 * [Features](#features)
@@ -11,6 +13,9 @@ The original Yolo V5 was an amazing project. When I want to make some changes to
 * [Getting Started](#getting-started)
     * [Dataset Preparation](#dataset-preparation)
     * [Training and Testing](#Training-and-Testing)
+        *[Training](#training)
+        *[Testing and Visualize](#testing-and-visualize)
+    * [Model performance comparison](#model-performance-comparison)
     * [Detection](#Detection)
     * [Deploy](#Deploy)
 * [Reference](#Reference)
@@ -50,7 +55,7 @@ Make data for yolov5 format. you can use od/data/transform_voc.py convert VOC da
 
 For training and Testing, it's same like yolov5.
 
-### Training
+#### Training
 
 1. check out configs/data.yaml, and replace with your data， and number of object nc
 2. check out configs/model_*.yaml, choose backbone. and change nc to your dataset. please refer support_backbone in models.backbone.__init__.py
@@ -61,7 +66,7 @@ $ python scripts/train.py  --batch 16 --epochs 5 --data configs/data.yaml --cfg 
 
 A google colab demo in train_demo.ipynb
 
-### Testing and Visualize
+#### Testing and Visualize
 
 ```shell script
 $ python scripts/eval.py   --data configs/data.yaml  --weights runs/train/yolo/weights/best.py
@@ -69,64 +74,8 @@ $ python scripts/eval.py   --data configs/data.yaml  --weights runs/train/yolo/w
 
 ### Model performance comparison 
 
-Because the training takes too much time, each model has only trained 150 epoch on coco2014. You can download it to continue training, and the model can continue to converge. The following model is different only from the backbone network, which is compared with yolov5s. The following table can be used as a performance comparison. But the results may not reflect the performance of the model correctly. For reference only.
+compare results of COCO2017 on the way.
 
-
-
-
-------------------------------
-
-efficientnet-b1 [链接: https://pan.baidu.com/s/1DdghRgq28g6p01ilS6x2AQ 提取码: 7w6m]
-
-![](images/effi_PR_curve.png)
-
-hrnet-18[链接: https://pan.baidu.com/s/1u64w5nk7QDxjYHkArV7OWw 提取码: ka9g]
-
-![](images/hr18_PR_curve.png)
-
-mobilenet-v3-small[链接: https://pan.baidu.com/s/1kKMHK9eKVh-p383qaAxIWg 提取码: j4he]
-
-![](images/mobile_PR_curve.png)
-
-repvgg-A0[链接: https://pan.baidu.com/s/1bxn0H_fGGguYQe7UJOjB6g 提取码: hsk3]
-
-![](images/repvgg_PR_curve.png)
-
-resnet18[链接: https://pan.baidu.com/s/11z78S84urfq5J0HvCPayyQ 提取码: 27ep]
-
-![](images/resnet_PR_curve.png)
-
-resnet18-cbam[链接: https://pan.baidu.com/s/1hGwdtudqmBnFOz018sQRXA 提取码: tm7n]
-
-![](images/resnetcbam_PR_curve.png)
-
-resnet18-dcn[链接: https://pan.baidu.com/s/1Z-YLzrQTFxH7xBpAsObvWQ 提取码: witg]
-
-![](images/resnetdcn_PR_curve.png)
-
-resnet18-dropblock[链接: https://pan.baidu.com/s/13mMBI_Kjjs6h68DFY8IRDw 提取码: 7iff]
-
-![](images/resnetdrop_PR_curve.png)
-
-shufflenetv2_x0.5[链接: https://pan.baidu.com/s/1KKtPn4pQjOI8iDhlGrp5kg 提取码: d8h8]
-
-![](images/shuffle_PR_curve.png)
-
-swin-tiny[链接: https://pan.baidu.com/s/15ecdj2O3a-U6FD9zh0d2bA 提取码: v9i4]
-
-![](images/swin_PR_curve.png)
-
-vgg-16bn[链接: https://pan.baidu.com/s/1TN6Lobi3ORrbQKbWlxVdTQ 提取码: nqv2]
-
-![](images/vgg_PR_curve.png)
-
-yolov5s[链接: https://pan.baidu.com/s/1Mc1J4t03qrslj1mywaWqBw 提取码: chtr]
-
-![](images/yolo5s_PR_curve.png)
-
-yolov5s-c3tr[链接: https://pan.baidu.com/s/14komD827Mal8rX-0YiHIoQ 提取码: clo1]
-
-![](images/yolo5sc3tr_PR_curve.png)
 
 --------------------------
 ### Detection
@@ -137,7 +86,7 @@ python scripts/detector.py   --weights yolov5.pth --imgs_root  test_imgs   --sav
 
 ### Deploy
 
-For tf_serving or triton_server, you can set model.detection.export = False in scripts/deploy/export.py in line 50 to export an onnx model, A new output node will be added to combine the three detection output nodes into one. 
+For tf_serving or triton_server, you can set model.detection.export = False in scripts/export.py in line 50 to export an onnx model, A new output node will be added to combine the three detection output nodes into one. 
 For Official tensorrt converter, you should set model.detection.export = True, because  ScatterND op not support by trt. For this repo, best use official tensorrt converter, not [tensorrtx](https://github.com/wang-xinyu/tensorrtx)
 
 #### Quantization

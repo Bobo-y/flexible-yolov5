@@ -25,11 +25,11 @@ if __name__ == '__main__':
     opt = parser.parse_args()
     opt.img_size *= 2 if len(opt.img_size) == 1 else 1  # expand
     print(opt)
-    set_logging()
+    set_logging('export')
     t = time.time()
 
     # Load PyTorch model
-    model = attempt_load(opt.weights, map_location=torch.device('cpu'))  # load FP32 model
+    model = attempt_load(opt.weights).to(torch.device('cpu'))  # load FP32 model
     labels = model.names
 
     # Checks
