@@ -76,5 +76,5 @@ class YOLOv5(nn.Module):
         return make_divisible(n * self.gw, 8)
 
     def re_channels_out(self):
-        for idx, channel_out in enumerate(self.channels_outs):
-            self.channels_outs[idx] = self.get_width(channel_out)
+        for idx, channel_out in enumerate(self.channels_out):
+            self.channels_out[idx] = self.get_width(channel_out)
