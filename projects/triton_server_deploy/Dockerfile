@@ -1,7 +1,6 @@
 FROM  nvcr.io/nvidia/tritonserver:20.10-py3
 
-LABEL maintainer="lulu" description="triton server including models"
-
+LABEL maintainer="Bobo-y" description="triton server including models"
 
 # Copy all models to docker
 COPY ./models /models

@@ -81,3 +81,4 @@ class TritonServingClient():
         else:
             outputs = results
         return outputs
+

@@ -146,3 +146,4 @@ class TFServingClient():
         results = self.predict(request)
         outputs = self.convert_outputs(results, configs['outputs'])
         return outputs
+

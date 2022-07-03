@@ -32,3 +32,4 @@ class NodeInfo():
     def reshape_data(self, data, shape):
         new_data = data.reshape(shape)
         return new_data
+        

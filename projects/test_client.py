@@ -8,3 +8,4 @@ serving_client = TritonServingClient('0.0.0.0:8001')
 yolov5 = Yolov5(model_serving=serving_client)
 img_path = ''
 results = yolov5(img_path)
+
