@@ -1,10 +1,10 @@
 # flexible-yolov5
 
 
-*Update the code for  [ultralytics/yolov5](https://github.com/ultralytics/yolov5) version 6.1. But there may be some bugs, verifying in progress*
+*Update the code for  [ultralytics/yolov5](https://github.com/ultralytics/yolov5) version 6.1. Hrnet have bugs, fix doing--*
 ---
 
-The original Yolo V5 was an amazing project. When I want to make some changes to the network, it's not so easy, such as adding branches and trying other backbones. Maybe there are people like me, so I split the yolov5 model to {backbone, neck, head} to facilitate the operation of various modules and support more backbones.Basically, I only changed the model, and I didn't change the architecture, training and testing of yolov5. Therefore, if the original code is updated, it is also very convenient to update this code. if this repo can help you, please give me a star.
+Split the yolov5 model to {backbone, neck, head} to facilitate the operation of various modules and support more backbones.Basically, only change the model, and I didn't change the architecture, training and testing of yolov5. Therefore, if the original code is updated, it is also very convenient to update this code. if you have some new ideas, you can give a pull request, add new features together。 if this repo can help you, please give me a star.
 
 ## Table of contents
 * [Features](#features)
