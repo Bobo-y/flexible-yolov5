@@ -101,11 +101,12 @@ python scripts/trt_quant/convert_trt_quant.py  --img_dir  /XXXX/train/  --img_si
 trt python infer demo scripts/trt_quant/trt_infer.py
 
 
-## bugs fixed
+## Notice
 
-- ~~resnet with dcn, training on gpu *RuntimeError: expected scalar type Half but found Float~~
-- ~~swin-transformer, training is ok, but testing report *RuntimeError: expected object of scalar type Float but got scalar type Half for argument #2 'mat2' in call to_th_bmm_out in swin_trsansformer.py 143~~
-- ~~mobilenet export onnx failed, please replace HardSigmoid() by others, because onnx don't support pytorch nn.threshold~~
+- resnet with dcn, training on gpu *RuntimeError: expected scalar type Half but found Float: please remove the mixed precision training in line 351 of scripts/train.py
+- swin-transformer, training is ok, but testing report *RuntimeError: expected object of scalar type Float but got scalar type Half for argument #2 'mat2' in call to_th_bmm_out in swin_trsansformer.py.   please set half=False in script/eval.py
+- mobilenet export onnx failed, please replace HardSigmoid() by others, because onnx don't support pytorch nn.threshold
+
 ## Reference
 
 * [ultralytics/yolov5](https://github.com/ultralytics/yolov5)
