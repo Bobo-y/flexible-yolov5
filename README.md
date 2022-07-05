@@ -1,7 +1,7 @@
 # flexible-yolov5
 
 
-*Update the code for  [ultralytics/yolov5](https://github.com/ultralytics/yolov5) version 6.1. Hrnet have bugs, fix doing--*
+*Update the code for  [ultralytics/yolov5](https://github.com/ultralytics/yolov5) version 6.1.*
 ---
 
 Split the yolov5 model to {backbone, neck, head} to facilitate the operation of various modules and support more backbones.Basically, only change the model, and I didn't change the architecture, training and testing of yolov5. Therefore, if the original code is updated, it is also very convenient to update this code. if you have some new ideas, you can give a pull request, add new features together。 if this repo can help you, please give me a star.
@@ -9,6 +9,7 @@ Split the yolov5 model to {backbone, neck, head} to facilitate the operation of 
 ## Table of contents
 * [Features](#features)
 * [Notices](#Notices)
+* [Bugs](#Bugs)
 * [Prerequisites](#prerequisites)
 * [Getting Started](#getting-started)
     * [Dataset Preparation](#dataset-preparation)
@@ -40,6 +41,14 @@ Split the yolov5 model to {backbone, neck, head} to facilitate the operation of 
 
 * The CBAM, SE, DCN, coord conv. At present, the above plug-ins are not added to all networks, so you may need to modify the code yourself.
 * The default gw and gd for PAN and FPN of other backbone are same as yolov5_s, so if you want a strong model, please modify self.gw and self.gd in FPN and PAN.
+* resnet with dcn, training on gpu *RuntimeError: expected scalar type Half but found Float: please remove the mixed precision training in line 351 of scripts/train.py
+* swin-transformer, training is ok, but testing report *RuntimeError: expected object of scalar type Float but got scalar type Half for argument #2 'mat2' in call to_th_bmm_out in swin_trsansformer.py.   please set half=False in script/eval.py
+* mobilenet export onnx failed, please replace HardSigmoid() by others, because onnx don't support pytorch nn.threshold
+
+## Bugs
+
+* model size bigger than original yolo
+* hrnet can't train
 
 ## Prerequisites
 
@@ -101,11 +110,6 @@ python scripts/trt_quant/convert_trt_quant.py  --img_dir  /XXXX/train/  --img_si
 trt python infer demo scripts/trt_quant/trt_infer.py
 
 
-## Notice
-
-- resnet with dcn, training on gpu *RuntimeError: expected scalar type Half but found Float: please remove the mixed precision training in line 351 of scripts/train.py
-- swin-transformer, training is ok, but testing report *RuntimeError: expected object of scalar type Float but got scalar type Half for argument #2 'mat2' in call to_th_bmm_out in swin_trsansformer.py.   please set half=False in script/eval.py
-- mobilenet export onnx failed, please replace HardSigmoid() by others, because onnx don't support pytorch nn.threshold
 
 ## Reference
 
