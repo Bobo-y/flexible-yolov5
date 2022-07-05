@@ -15,7 +15,7 @@ class PAN(nn.Module):
     P5 --->  PP5
     """
 
-    def __init__(self, P3_size=256, P4_size=256, P5_size=512, channels_outs=[512, 1024], version='s'):
+    def __init__(self, P3_size=256, P4_size=256, P5_size=512, channels_outs=[256, 512, 512, 1024], version='s'):
         super(PAN, self).__init__()
         self.version = str(version)
         self.channels_outs = channels_outs
@@ -41,16 +41,16 @@ class PAN(nn.Module):
         self.P4_size = P4_size
         self.P5_size = P5_size
 
-        self.convP3 = Conv(self.P3_size, self.P3_size, 3, 2)
-        self.P4 = C3(self.P3_size + self.P4_size, self.channels_outs[0], self.get_depth(3), False)
+        self.convP3 = Conv(self.P3_size,  self.channels_outs[0], 3, 2)
+        self.P4 = C3(self.channels_outs[0] + self.P4_size, self.channels_outs[1], self.get_depth(3), False)
 
-        self.convP4 = Conv(self.channels_outs[0], self.channels_outs[0], 3, 2)
-        self.P5 = C3(self.channels_outs[0] + self.P5_size, self.channels_outs[1], self.get_depth(3), False)
+        self.convP4 = Conv(self.channels_outs[1], self.channels_outs[2], 3, 2)
+        self.P5 = C3(self.channels_outs[2] + self.P5_size, self.channels_outs[3], self.get_depth(3), False)
 
         self.concat = Concat()
-        self.out_shape = [self.P3_size, self.channels_outs[0], self.channels_outs[1]]
+        self.out_shape = [self.P3_size, self.channels_outs[2], self.channels_outs[3]]
         print("PAN input channel size: P3 {}, P4 {}, P5 {}".format(self.P3_size, self.P4_size, self.P5_size))
-        print("PAN output channel size: PP3 {}, PP4 {}, PP5 {}".format(self.P3_size, self.channels_outs[0], self.channels_outs[1]))
+        print("PAN output channel size: PP3 {}, PP4 {}, PP5 {}".format(self.P3_size, self.channels_outs[2], self.channels_outs[3]))
 
     def get_depth(self, n):
         return max(round(n * self.gd), 1) if n > 1 else n
