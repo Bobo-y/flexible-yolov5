@@ -47,7 +47,6 @@ Split the yolov5 model to {backbone, neck, head} to facilitate the operation of 
 
 ## Bugs
 
-* model size bigger than original yolo
 * hrnet can't train
 
 ## Prerequisites
