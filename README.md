@@ -94,8 +94,9 @@ python scripts/detector.py   --weights yolov5.pth --imgs_root  test_imgs   --sav
 
 ### Deploy
 
-For tf_serving or triton_server, you can set model.detection.export = False in scripts/export.py in line 50 to export an onnx model, A new output node will be added to combine the three detection output nodes into one. 
-For Official tensorrt converter, you should set model.detection.export = True, because  ScatterND op not support by trt. For this repo, best use official tensorrt converter, not [tensorrtx](https://github.com/wang-xinyu/tensorrtx)
+```shell
+python scripts/export.py   --weights yolov5.pth 
+```
 
 #### Quantization
 
