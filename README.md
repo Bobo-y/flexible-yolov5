@@ -36,6 +36,7 @@ Split the yolov5 model to {backbone, neck, head} to facilitate the operation of 
 - coord conv
 - drop_block
 - vgg, repvgg
+- tensorrt c++ infer
 
 ## Notices
 
@@ -97,6 +98,8 @@ python scripts/detector.py   --weights yolov5.pth --imgs_root  test_imgs   --sav
 ```shell
 python scripts/export.py   --weights yolov5.pth 
 ```
+
+For tensorrt model, you can direct use official trt export, and refer scripts/deploy/cpp/. For test, I use TensorRT-8.4.0.6.
 
 #### Quantization
 
