@@ -99,7 +99,7 @@ python scripts/detector.py   --weights yolov5.pth --imgs_root  test_imgs   --sav
 python scripts/export.py   --weights yolov5.pth 
 ```
 
-For tensorrt model, you can direct use official trt export, and refer scripts/deploy/cpp/. For test, I use TensorRT-8.4.0.6.
+For tensorrt model, you can direct use official trt export, and refer scripts/trt_infer/cpp/. For test, I use TensorRT-8.4.0.6.
 
 #### Quantization
 
