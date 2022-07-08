@@ -19,8 +19,8 @@ include_directories(/usr/local/cuda/include)
 link_directories(/usr/local/cuda/lib64)
 
 # tensorrt
-include_directories(/home/yanglin5/Resources/TensorRT-8.4.0.6/include)
-link_directories(/home/yanglin5/Resources/TensorRT-8.4.0.6/lib)
+include_directories(/home/Resources/TensorRT-8.4.0.6/include)
+link_directories(/home/Resources/TensorRT-8.4.0.6/lib)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Wall -Ofast -Wfatal-errors -D_MWAITXINTRIN_H_INCLUDED")
 
