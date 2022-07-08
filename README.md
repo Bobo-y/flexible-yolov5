@@ -14,8 +14,8 @@ Split the yolov5 model to {backbone, neck, head} to facilitate the operation of 
 * [Getting Started](#getting-started)
     * [Dataset Preparation](#dataset-preparation)
     * [Training and Testing](#Training-and-Testing)
-        *[Training](#training)
-        *[Testing and Visualize](#testing-and-visualize)
+        * [Training](#training)
+        * [Testing and Visualize](#testing-and-visualize)
     * [Model performance comparison](#model-performance-comparison)
     * [Detection](#Detection)
     * [Deploy](#Deploy)
@@ -110,7 +110,10 @@ python scripts/trt_quant/convert_trt_quant.py  --img_dir  /XXXX/train/  --img_si
 ```
 [See](scripts/trt_quant/README)
 
-trt python infer demo scripts/trt_quant/trt_infer.py
+
+#### trt infer
+
+privode c++ / python demo, scripts/trt_infer
 
 
 
