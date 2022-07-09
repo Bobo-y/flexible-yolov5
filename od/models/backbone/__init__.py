@@ -8,6 +8,7 @@ from .hrnet import hrnet
 from .swin_transformer import swin_transformer as swin
 from .vgg import vgg
 from .repvgg import repvgg
+from .gnn import gnn
 
 __all__ = ['build_backbone']
 

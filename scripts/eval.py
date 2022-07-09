@@ -133,6 +133,7 @@ def run(
         data = check_dataset(data)  # check
     stride = model.stride.max()
     # Configure
+    model.info()
     model.eval()
     cuda = device.type != 'cpu'
     is_coco = isinstance(data.get('val'), str) and data['val'].endswith(f'coco{os.sep}val2017.txt')  # COCO dataset

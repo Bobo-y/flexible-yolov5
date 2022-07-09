@@ -37,6 +37,7 @@ Split the yolov5 model to {backbone, neck, head} to facilitate the operation of 
 - drop_block
 - vgg, repvgg
 - tensorrt c++ infer
+- gnn backbone
 
 ## Notices
 
@@ -83,10 +84,28 @@ $ python scripts/eval.py   --data configs/data.yaml  --weights runs/train/yolo/w
 
 ### Model performance comparison 
 
-compare results of COCO2017 on the way.
+Doing!!
+
+All checkpoints are trained to 300 epochs with default settings. Yolov5 Nano and Small models use hyp.scratch-low.yaml hyps, all others use hyp.scratch-high.yaml. The mAP of the validation come to the last epoch, maybe not the best.
+
+|Model |size<br><sup>(pixels) |mAP<sup>val<br>0.5:0.95 |mAP<sup>val<br>0.5 |params<br><sup>(M) 
+|---                    |---  |---    |---    |---    
+|[flexible-YOLOv5n]     |640  |25.7   |43.3   | 1872157
+|[flexible-YOLOv5s]     |640  |35     |54.7   | 7235389
+|[flexible-YOLOv5m]     |640  |42.1   |62     | 21190557
+|[flexible-YOLOv5l]     |640  |       |       |   
+|[flexible-YOLOv5x]     |640  |       |       | 
+|                       |     |       |       |    
+|[mobilnet-v3-small]      |640  |   |   | 
+|[resnet-18]              |640  |   |   |
+|[shufflenetv2-x1_0]      |640  |   |   | 
+|[repvgg-A0]              |640  |   |   | 
+|[vgg-16bn]              |640  |   |   | 
+|[efficientnet-b1]        |640  |   |   | 
+|[swin-tiny]              |640  |   |   | 
+|[gnn-tiny]              |640  |   |   |
 
 
---------------------------
 ### Detection
 
 ```shell

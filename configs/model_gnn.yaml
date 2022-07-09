@@ -1,0 +1,22 @@
+backbone:
+  type: gnn
+  version: tiny # tiny, small, medium , big
+  num_k: 9 # neighbor num (default:9)
+  conv : 'mr' # graph conv layer {edge, mr}
+  act : 'gelu' # activation layer {relu, prelu, leakyrelu, gelu, hswish}
+  norm : 'batch' # batch or instance normalization {batch, instance}
+  bias : True # bias of conv layer True or False
+  epsilon : 0.2 # stochastic epsilon for gcn
+  stochastic : False # stochastic for gcn, True or False
+  drop_path : 0.0
+  blocks : [2, 2, 6, 2] # number of basic blocks in the backbone
+  channels : [48, 96, 240, 384] # number of channels of deep features
+  emb_dims : 1024 # Dimension of embeddings
+  img_size: [640, 640]
+head:
+  nc: 80
+  stride: [8.0, 16.0, 32.0]
+  anchors:
+    - [10,13, 16,30, 33,23]  # P3/8
+    - [30,61, 62,45, 59,119]  # P4/16
+    - [116,90, 156,198, 373,326]  # P5/32

@@ -297,9 +297,9 @@ class YoLov5TRT():
 
 if __name__ == "__main__":
 
-    engine_file_path = "/home/yanglin5/PyProjects/yolov5_trt/model.trt"
+    engine_file_path = "model.trt"
     yolov5_wrapper = YoLov5TRT(engine_file_path)
-    img_path = '/home/yanglin5/PyProjects/flexible-yolov5-2/test_imgs/cat_dog.jpg'
+    img_path = 'test_imgs/cat_dog.jpg'
     img = yolov5_wrapper.get_image(img_path)
     try:
         bboxes = yolov5_wrapper.infer(img)

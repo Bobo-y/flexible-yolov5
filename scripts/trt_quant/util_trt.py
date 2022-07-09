@@ -2,6 +2,7 @@ import os
 import tensorrt as trt
 from calibrator import Calibrator
 
+
 # add verbose
 TRT_LOGGER = trt.Logger(trt.Logger.VERBOSE)  # ** engine可视化 **
 
