@@ -36,7 +36,7 @@ Split the yolov5 model to {backbone, neck, head} to facilitate the operation of 
 - coord conv
 - drop_block
 - vgg, repvgg
-- tensorrt c++ infer
+- tensorrt c++/python infer
 - gnn backbone
 
 ## Notices
