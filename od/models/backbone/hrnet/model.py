@@ -222,7 +222,7 @@ class HighResolutionModule(nn.Module):
                                   bias=False),
                         self.norm_layer(num_inchannels[i])))
                 elif j == i:
-                    fuse_layer.append(None)
+                    fuse_layer.append(nn.Identity())
                 else:
                     conv3x3s = []
                     for k in range(i - j):
@@ -367,7 +367,7 @@ class HighResolutionNet(nn.Module):
                         self.norm_layer(num_channels_cur_layer[i]),
                         nn.ReLU(inplace=True)))
                 else:
-                    transition_layers.append(None)
+                    transition_layers.append(nn.Identity())
             else:
                 conv3x3s = []
                 for j in range(i + 1 - num_branches_pre):
@@ -442,7 +442,7 @@ class HighResolutionNet(nn.Module):
 
         x_list = []
         for i in range(self.stage2_cfg['NUM_BRANCHES']):
-            if self.transition1[i] is not None:
+            if not isinstance(self.transition1[i], nn.Identity):
                 x_list.append(self.transition1[i](x))
             else:
                 x_list.append(x)
@@ -450,7 +450,7 @@ class HighResolutionNet(nn.Module):
 
         x_list = []
         for i in range(self.stage3_cfg['NUM_BRANCHES']):
-            if self.transition2[i] is not None:
+            if not isinstance(self.transition2[i], nn.Identity):
                 if i < self.stage2_cfg['NUM_BRANCHES']:
                     x_list.append(self.transition2[i](y_list[i]))
                 else:
@@ -461,7 +461,7 @@ class HighResolutionNet(nn.Module):
 
         x_list = []
         for i in range(self.stage4_cfg['NUM_BRANCHES']):
-            if self.transition3[i] is not None:
+            if not isinstance(self.transition3[i], nn.Identity):
                 if i < self.stage3_cfg['NUM_BRANCHES']:
                     x_list.append(self.transition3[i](y_list[i]))
                 else:

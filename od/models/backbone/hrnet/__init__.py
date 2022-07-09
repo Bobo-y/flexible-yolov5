@@ -1,1 +1,1 @@
-from .mdoel import hrnet
+from .model import hrnet

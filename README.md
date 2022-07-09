@@ -49,7 +49,7 @@ Split the yolov5 model to {backbone, neck, head} to facilitate the operation of 
 
 ## Bugs
 
-* hrnet can't train
+None
 
 ## Prerequisites
 
