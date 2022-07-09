@@ -88,7 +88,7 @@ Doing!!
 
 All checkpoints are trained to 300 epochs with default settings. Yolov5 Nano and Small models use hyp.scratch-low.yaml hyps, all others use hyp.scratch-high.yaml. The mAP of the validation come to the last epoch, maybe not the best.
 
-|Model |size<br><sup>(pixels) |mAP<sup>val<br>0.5:0.95 |mAP<sup>val<br>0.5 |params<br><sup>(M) 
+|Model |size<br><sup>(pixels) |mAP<sup>val<br>0.5:0.95 |mAP<sup>val<br>0.5 |params<br><sup> 
 |---                    |---  |---    |---    |---    
 |[flexible-YOLOv5n]     |640  |25.7   |43.3   | 1872157
 |[flexible-YOLOv5s]     |640  |35     |54.7   | 7235389
