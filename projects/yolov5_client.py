@@ -25,7 +25,7 @@ class Yolov5():
             "model_spec_name": "yolov5s",
             "model_spec_signature_name": "serving_default",
             "inputs": [{'node_name': 'images', 'node_type': 'FP32', 'node_shape': [3, 640, 640]}],
-            "outputs": [{'node_name': 'output', 'node_type': 'FP32', 'node_shape': [1, 25200, 7]}]
+            "outputs": [{'node_name': 'output', 'node_type': 'FP32', 'node_shape': [1, 25200, 85]}]
         }
     }
 

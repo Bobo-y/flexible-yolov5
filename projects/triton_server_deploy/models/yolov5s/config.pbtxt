@@ -14,7 +14,7 @@ output [
   {
     name: "output"
     data_type: TYPE_FP32
-    dims: [1,25200,7]
+    dims: [1,25200,85]
   }
 ]
 
