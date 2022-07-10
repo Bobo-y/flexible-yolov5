@@ -12,7 +12,7 @@ from .gnn import gnn
 
 __all__ = ['build_backbone']
 
-support_backbone = ['resnet', 'shufflenetv2', 'mobilenetv3', 'YOLOv5', 'efficientnet', 'hrnet', 'swin', 'vgg', 'repvgg']
+support_backbone = ['resnet', 'shufflenetv2', 'mobilenetv3', 'YOLOv5', 'efficientnet', 'hrnet', 'swin', 'vgg', 'repvgg', 'gnn']
 
 
 def build_backbone(backbone_name, **kwargs):
