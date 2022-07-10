@@ -16,7 +16,7 @@ Split the yolov5 model to {backbone, neck, head} to facilitate the operation of 
     * [Training and Testing](#Training-and-Testing)
         * [Training](#training)
         * [Testing and Visualize](#testing-and-visualize)
-    * [Model performance comparison](#model-performance-comparison)
+    * [Model performance comparison](#Model performance comparison with different backbone)
     * [Detection](#Detection)
     * [Deploy](#Deploy)
 * [Reference](#Reference)
@@ -82,7 +82,7 @@ A google colab demo in train_demo.ipynb
 $ python scripts/eval.py   --data configs/data.yaml  --weights runs/train/yolo/weights/best.py
 ```
 
-### Model performance comparison 
+### Model performance comparison with different backbone
 
 Doing!!
 
