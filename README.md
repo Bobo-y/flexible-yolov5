@@ -16,7 +16,7 @@ Split the yolov5 model to {backbone, neck, head} to facilitate the operation of 
     * [Training and Testing](#Training-and-Testing)
         * [Training](#training)
         * [Testing and Visualize](#testing-and-visualize)
-    * [Model performance comparison](#Model performance comparison with different backbone)
+    * [Model performance comparison](#Model-performance-comparison-with-different-backbone)
     * [Detection](#Detection)
     * [Deploy](#Deploy)
 * [Reference](#Reference)
