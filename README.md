@@ -98,8 +98,8 @@ All checkpoints are trained to 300 epochs with default settings. Yolov5 Nano and
 |[flexible-YOLOv5x]     |640  |       |       | 
 |                       |     |       |       |    
 |[mobilnet-v3-small]    |640  |21.9   | 37.6  | 3185757
-|[resnet-18]              |640  |   |   |
-|[shufflenetv2-x1_0]      |640  |   |   | 
+|[resnet-18]              |640  | 34.6  | 53.7  |14240445
+|[shufflenetv2-x1_0]      |640  | 27.8  | 45.1  | 4297569
 |[repvgg-A0]              |640  |   |   | 
 |[vgg-16bn]              |640  |   |   | 
 |[efficientnet-b1]        |640  |   |   | 
