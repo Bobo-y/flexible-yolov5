@@ -83,8 +83,8 @@ if __name__ == '__main__':
     if not os.path.exists(opt.save_model):
         os.mkdir(opt.save_model)
     onnx_model_path = opt.onnx_model
-    engine_model_path = os.path.join(opt.save_model, opt.model + '_model.trt')
-    calibration_table = os.path.join(opt.save_model, opt.model + '_calibration.cache')
+    engine_model_path = os.path.join(opt.save_model, opt.mode + '_model.trt')
+    calibration_table = os.path.join(opt.save_model, opt.mode + '_calibration.cache')
     # fixed_engine,校准产生校准表
     engine_fixed = util_trt.get_engine(opt.batch_size, onnx_model_path, engine_model_path, fp16_mode=fp16_mode,
                                        int8_mode=int8_mode, calibration_stream=calibration_stream,
