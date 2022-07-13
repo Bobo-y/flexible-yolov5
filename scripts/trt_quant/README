@@ -5,3 +5,5 @@ yolov5 tensorrt int8 or fp16 量化, 代码参考自 [nanodet_tensorrt_int8_tool
 ```shell script
 python scripts/trt_quant/convert_trt_quant.py --img_dir  /XXXX/train/  --img_size 640 --batch_size 6 --batch 200 --onnx_model runs/train/exp1/weights/bast.onnx  --mode int8 
 ```
+
+this scripts run in tensorrt 7
