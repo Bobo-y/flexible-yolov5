@@ -3,7 +3,7 @@
 
 *Update the code for  [ultralytics/yolov5](https://github.com/ultralytics/yolov5) version 6.1.*
 ---
-代码基于U版YOLOv5  6.1版本. 根据 {backbone, neck, head} 重新组织了网络结构, 目前backbone 除了原始的YOLO外，还可选择 resnet, hrnet, swin-transformer, gnn, mobilenet 等主流backbone. 同时也可以自由的加入 SE, DCN, drop block 等插件. 可以很方便的对网络结构等进行替换、修改、实验. 工程包含了模型训练、导出、triton server部署推理、tf_serving部署推理, 以及 tensorrt 的c++、Python 推理, tensorrt 量化. 如果你有什么好的idea，比如增加新的backbone, 插件等, 欢迎提PR, 使用时遇到什么问题, 也欢迎提issue. 如果对你有帮助, 感谢给颗♥(ˆ◡ˆԅ)小 ⭐️⭐️. 
+代码基于U版YOLOv5  6.1版本. 根据 {backbone, neck, head} 重新组织了网络结构, 目前backbone 除了原始的YOLO外，还可选择 resnet, hrnet, swin-transformer, gnn, mobilenet 等主流backbone. 同时也可以自由的加入 SE, DCN, drop block 等插件. 可以很方便的对网络结构等进行替换、修改、实验. 同时提供了tensorrt 的c++、Python 推理, 量化. 如果你有什么好的idea，比如增加新的backbone, 插件等, 欢迎提PR, 使用时遇到什么问题, 也欢迎提issue. 如果对你有帮助, 感谢给颗♥(ˆ◡ˆԅ)小 ⭐️⭐️. 
 ---
 Split the yolov5 model to {backbone, neck, head} to facilitate the operation of various modules and support more backbones.Basically, only change the model, and I didn't change the architecture, training and testing of yolov5. Therefore, if the original code is updated, it is also very convenient to update this code. if you have some new ideas, you can give a pull request, add new features together。 if this repo can help you, please give me a star.
 
@@ -37,7 +37,7 @@ Split the yolov5 model to {backbone, neck, head} to facilitate the operation of 
 - coord conv
 - drop_block
 - vgg, repvgg
-- tensorrt c++/python infer
+- tensorrt c++/python infer, triton server infer
 - gnn backbone
 
 ## Notices
@@ -91,15 +91,15 @@ All checkpoints are trained to 300 epochs with default settings. Yolov5 Nano and
 
 |Model |size<br><sup>(pixels) |mAP<sup>val<br>0.5:0.95 |mAP<sup>val<br>0.5 |params<br><sup> 
 |---                    |---  |---    |---    |---    
-|[flexible-YOLOv5n]     |640  |25.7   |43.3   | 1872157
-|[flexible-YOLOv5s]     |640  |35     |54.7   | 7235389
+|[flexible-YOLOv5n](https://pan.baidu.com/s/1UAvEmgWmpxA3oPm5CJ8C-g 提取码: kg22)     |640  |25.7   |43.3   | 1872157
+|[flexible-YOLOv5s](https://pan.baidu.com/s/1ImN2ryMK3IPy8_St-Rzxhw 提取码: pt8i)     |640  |35     |54.7   | 7235389
 |[flexible-YOLOv5m]     |640  |42.1   |62     | 21190557
 |[flexible-YOLOv5l]     |640  |       |       |   
 |[flexible-YOLOv5x]     |640  |       |       | 
 |                       |     |       |       |    
 |[mobilnet-v3-small]    |640  |21.9   | 37.6  | 3185757
-|[resnet-18]              |640  | 34.6  | 53.7  |14240445
-|[shufflenetv2-x1_0]      |640  | 27.8  | 45.1  | 4297569
+|[resnet-18]              |640  |   |   |
+|[shufflenetv2-x1_0]      |640  |   |   | 
 |[repvgg-A0]              |640  |   |   | 
 |[vgg-16bn]              |640  |   |   | 
 |[efficientnet-b1]        |640  |   |   | 
