@@ -3,7 +3,7 @@
 
 *Update the code for  [ultralytics/yolov5](https://github.com/ultralytics/yolov5) version 6.1.*
 ---
-代码基于U版YOLOv5  6.1版本. 根据 {backbone, neck, head} 重新组织了网络结构, 目前backbone 除了原始的YOLO外，还可选择 resnet, hrnet, swin-transformer, gnn, mobilenet 等主流backbone. 同时也可以自由的加入 SE, DCN, drop block 等插件. 可以很方便的对网络结构等进行替换、修改、实验. 同时提供了tensorrt 的c++、Python 推理, 量化. 如果你有什么好的idea，比如增加新的backbone, 插件等, 欢迎提PR, 使用时遇到什么问题, 也欢迎提issue. 如果对你有帮助, 感谢给颗♥(ˆ◡ˆԅ)小 ⭐️⭐️. 
+代码基于U版YOLOv5  6.1版本. 根据 {backbone, neck, head} 重新组织了网络结构, 目前backbone 除了原始的YOLO外，还可选择 resnet, hrnet, swin-transformer, gnn, mobilenet 等主流backbone. 同时也可以自由的加入 SE, DCN, drop block 等插件. 可以很方便的对网络结构等进行替换、修改、实验. 同时提供了tensorrt 的c++、Python 推理, 量化. 以及Triton、tf_serving 部署代码. 如果你有什么好的idea，比如增加新的backbone, 插件等, 欢迎提PR, 使用时遇到什么问题, 也欢迎提issue. 如果对你有帮助, 感谢给颗♥(ˆ◡ˆԅ)小 ⭐️⭐️. 
 ---
 Split the yolov5 model to {backbone, neck, head} to facilitate the operation of various modules and support more backbones.Basically, only change the model, and I didn't change the architecture, training and testing of yolov5. Therefore, if the original code is updated, it is also very convenient to update this code. if you have some new ideas, you can give a pull request, add new features together。 if this repo can help you, please give me a star.
 
@@ -98,8 +98,8 @@ All checkpoints are trained to 300 epochs with default settings. Yolov5 Nano and
 |[flexible-YOLOv5x]     |640  |       |       | 
 |                       |     |       |       |    
 |[mobilnet-v3-small]    |640  |21.9   | 37.6  | 3185757
-|[resnet-18]              |640  |   |   |
-|[shufflenetv2-x1_0]      |640  |   |   | 
+|[resnet-18]              |640  | 34.6  | 53.7  |14240445
+|[shufflenetv2-x1_0]      |640  | 27.8  | 45.1  | 4297569
 |[repvgg-A0]              |640  |   |   | 
 |[vgg-16bn]              |640  |   |   | 
 |[efficientnet-b1]        |640  |   |   | 
