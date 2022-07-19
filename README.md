@@ -94,7 +94,7 @@ All checkpoints are trained to 300 epochs with default settings. Yolov5 Nano and
 |[flexible-YOLOv5n](https://pan.baidu.com/s/1UAvEmgWmpxA3oPm5CJ8C-g 提取码: kg22)     |640  |25.7   |43.3   | 1872157
 |[flexible-YOLOv5s](https://pan.baidu.com/s/1ImN2ryMK3IPy8_St-Rzxhw 提取码: pt8i)     |640  |35     |54.7   | 7235389
 |[flexible-YOLOv5m]     |640  |42.1   |62     | 21190557
-|[flexible-YOLOv5l]     |640  |       |       |   
+|[flexible-YOLOv5l]     |640  |45.3   |65.3   | 46563709  
 |[flexible-YOLOv5x]     |640  |       |       | 
 |                       |     |       |       |    
 |[mobilnet-v3-small]    |640  |21.9   | 37.6  | 3185757
