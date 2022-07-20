@@ -20,6 +20,8 @@ Split the yolov5 model to {backbone, neck, head} to facilitate the operation of 
     * [Model performance comparison](#Model-performance-comparison-with-different-backbone)
     * [Detection](#Detection)
     * [Deploy](#Deploy)
+        * [Export](#Export)
+        * [Grpc server](#Grpc-server)
 * [Reference](#Reference)
 
 
@@ -115,15 +117,20 @@ python scripts/detector.py   --weights yolov5.pth --imgs_root  test_imgs   --sav
 
 ### Deploy
 
+#### Export 
 ```shell
 python scripts/export.py   --weights yolov5.pth 
 ```
 
-For tensorrt model, you can direct use official trt export, and refer scripts/trt_infer/cpp/. For test, I use TensorRT-8.4.0.6.
+#### Grpc Server
+
+In projects folder, tf_serving and triton demo are provided. 
 
 #### Quantization
 
 You can directly quantify the onnx model
+
+This script run succ on Tensorrt 7.x. For 8.x, this code need be rewrite.
 
 ```shell
 python scripts/trt_quant/convert_trt_quant.py  --img_dir  /XXXX/train/  --img_size 640 --batch_size 6 --batch 200 --onnx_model runs/train/exp1/weights/bast.onnx  --mode int8
@@ -131,7 +138,9 @@ python scripts/trt_quant/convert_trt_quant.py  --img_dir  /XXXX/train/  --img_si
 [See](scripts/trt_quant/README)
 
 
-#### trt infer
+#### Tensorrt Inference
+
+For tensorrt model, you can direct use official trt export, and refer scripts/trt_infer/cpp/. For test, I use TensorRT-8.4.0.6.
 
 privode c++ / python demo, scripts/trt_infer
 
