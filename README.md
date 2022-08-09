@@ -87,7 +87,7 @@ $ python scripts/eval.py   --data configs/data.yaml  --weights runs/train/yolo/w
 
 ### Model performance comparison with different backbone
 
-Doing!!
+For some reasons, I can't provide the pretrained weight, only the comparison results. Sorry! 
 
 All checkpoints are trained to 300 epochs with default settings. Yolov5 Nano and Small models use hyp.scratch-low.yaml hyps, all others use hyp.scratch-high.yaml. The mAP of the validation come to the last epoch, maybe not the best.
 
