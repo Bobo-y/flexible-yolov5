@@ -104,7 +104,7 @@ All checkpoints are trained to 300 epochs with default settings, all backbones w
 |[shufflenetv2-x1_0]      |640  | 27.8  | 45.1  | 4297569
 |[repvgg-A0]              |640  |   |   | 
 |[vgg-16bn]              |640  |   |   | 
-|[efficientnet-b1]        |640  |   |   | 
+|[efficientnet-b1]        |640  | 38.1  | 58.6  | 9725597
 |[swin-tiny]              |640  |   |   | 
 |[gnn-tiny]              |640  |   |   |
 
