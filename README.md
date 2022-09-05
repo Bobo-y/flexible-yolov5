@@ -98,7 +98,7 @@ All checkpoints are trained to 300 epochs with default settings, all backbones w
 |[flexible-YOLOv5m]     |640  |42.1   |62     | 21190557
 |[flexible-YOLOv5l]     |640  |45.3   |65.3   | 46563709  
 |[flexible-YOLOv5x]     |640  |47     |66.7   | 86749405
-|     others backbone                  |     |       |       |    
+|     <center>others backbone</center>                  |     |       |       |    
 |[mobilnet-v3-small]    |640  |21.9   | 37.6  | 3185757
 |[resnet-18]              |640  | 34.6  | 53.7  |14240445
 |[shufflenetv2-x1_0]      |640  | 27.8  | 45.1  | 4297569
