@@ -92,7 +92,7 @@ For some reasons, I can't provide the pretrained weight, only the comparison res
 All checkpoints are trained to 300 epochs with default settings, all backbones without pretrained weights. Yolov5 Nano and Small models use hyp.scratch-low.yaml hyps, all others use hyp.scratch-high.yaml. The mAP of the validation come to the last epoch, maybe not the best.
 
 |flexible-yolov5 model with different backbones|size<br><sup>(pixels) |mAP<sup>val<br>0.5:0.95 |mAP<sup>val<br>0.5 |params<br><sup> 
-|---     standard backbone                |---  |---    |---    |---    
+|    standard backbone                |---  |---    |---    |---    
 |[flexible-YOLOv5n](https://pan.baidu.com/s/1UAvEmgWmpxA3oPm5CJ8C-g 提取码: kg22)     |640  |25.7   |43.3   | 1872157
 |[flexible-YOLOv5s](https://pan.baidu.com/s/1ImN2ryMK3IPy8_St-Rzxhw 提取码: pt8i)     |640  |35     |54.7   | 7235389
 |[flexible-YOLOv5m]     |640  |42.1   |62     | 21190557
