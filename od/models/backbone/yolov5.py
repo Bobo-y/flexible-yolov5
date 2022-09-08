@@ -42,9 +42,7 @@ class YOLOv5(nn.Module):
 
         self.sppf = SPPF(self.channels_out[8], self.channels_out[9], 5)
         
-        self.out_shape = {'C3_size': self.channels_out[3],
-                          'C4_size': self.channels_out[5],
-                          'C5_size': self.channels_out[9]}
+        self.out_shape = [self.channels_out[3], self.channels_out[5], self.channels_out[9]]
 
         print("backbone output channel: C3 {}, C4 {}, C5(SPPF) {}".format(self.channels_out[3],
                                                                     self.channels_out[5],
