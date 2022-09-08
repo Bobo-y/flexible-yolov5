@@ -213,9 +213,7 @@ class EfficientNet(nn.Module):
 
         self._swish = MemoryEfficientSwish()
         self.output_channels.append(out_channels)
-        self.out_shape = {'C3_size': 0,
-                          'C4_size': 0,
-                          'C5_size': out_channels}
+        self.out_shape = [0, 0, out_channels]
 
     def set_swish(self, memory_efficient=True):
         """Sets swish function as memory efficient (for training) or standard (for export).
@@ -271,7 +269,7 @@ class EfficientNet(nn.Module):
         endpoints = endpoints[-3:]
         for idx, feature in enumerate(endpoints):
             b, c, w, h = feature.shape
-            self.out_shape['C{}_size'.format(idx + 3)] = c
+            self.out_shape[idx] = c
 
         return endpoints
 
