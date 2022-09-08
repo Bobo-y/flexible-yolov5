@@ -31,7 +31,7 @@ class Model(nn.Module):
             neck_params['ch'] = ch_in
             neck = build_neck(neck_name, **neck_params)
             ch_in = neck.out_shape
-            self.necks.append(meck)
+            self.necks.append(neck)
             
         model_config.head['ch'] = ch_in
         self.detection = build_head('YOLOHead', **model_config.head)
