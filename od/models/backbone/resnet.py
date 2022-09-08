@@ -167,9 +167,9 @@ class Resnet(nn.Module):
                     if hasattr(m, 'conv2_offset'):
                         constant_init(m.conv2_offset, 0)
 
-        self.out_shape = {'C3_size': self.out_channels[0] * 2,
-                          'C4_size': self.out_channels[1] * 2,
-                          'C5_size': self.out_channels[2] * 2}
+        self.out_shape = [self.out_channels[0] * 2,
+                          self.out_channels[1] * 2,
+                          self.out_channels[2] * 2]
 
         print("backbone output channel: C3 {}, C4 {}, C5 {}".format(self.out_channels[0] * 2, self.out_channels[1] * 2, self.out_channels[2] * 2))
 
