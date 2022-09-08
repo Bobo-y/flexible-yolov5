@@ -344,9 +344,9 @@ class HighResolutionNet(nn.Module):
             pre_stage_channels, num_channels)
         self.stage4, pre_stage_channels = self._make_stage(
             self.stage4_cfg, num_channels, multi_scale_output=True)
-        self.out_shape = {'C3_size': num_channels[-3],
-                          'C4_size': num_channels[-2],
-                          'C5_size': num_channels[-1]}
+        self.out_shape = [num_channels[-3],
+                          num_channels[-2],
+                          num_channels[-1]]
 
     def _make_transition_layer(
             self, num_channels_pre_layer, num_channels_cur_layer):
