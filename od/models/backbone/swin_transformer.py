@@ -541,9 +541,7 @@ class SwinTransformer(nn.Module):
 
         num_features = [int(embed_dim * 2 ** i) for i in range(self.num_layers)]
         self.num_features = num_features
-        self.out_shape = {'C3_size': num_features[-3],
-                          'C4_size': num_features[-2],
-                          'C5_size': num_features[-1]}
+        self.out_shape = [num_features[-3], num_features[-2], num_features[-1]]
         # add a norm layer for each output
         for i_layer in out_indices:
             layer = norm_layer(num_features[i_layer])
