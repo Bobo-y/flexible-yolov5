@@ -17,12 +17,12 @@ class PyramidFeatures(nn.Module):
     C5 --->    P5
     """
 
-    def __init__(self, C3_size=256, C4_size=512, C5_size=1024, channel_outs=[512, 256], version='s'):
+    def __init__(self, ch=[256, 512, 1024], channel_outs=[512, 256], version='s'):
         super(PyramidFeatures, self).__init__()
 
-        self.C3_size = C3_size
-        self.C4_size = C4_size
-        self.C5_size = C5_size
+        self.C3_size = ch[0]
+        self.C4_size = ch[1]
+        self.C5_size = ch[2]
         self.channels_outs = channel_outs
         self.version = version
         gains = {
@@ -54,9 +54,7 @@ class PyramidFeatures(nn.Module):
         self.P3 = C3(self.channels_outs[1] + self.C3_size, self.channels_outs[1], self.get_depth(3), False)
 
 
-        self.out_shape = {'P3_size': self.channels_outs[1],
-                          'P4_size': self.channels_outs[1],
-                          'P5_size': self.channels_outs[0]}
+        self.out_shape = [ self.channels_outs[1], self.channels_outs[1], self.channels_outs[0]]
         print("FPN input channel size: C3 {}, C4 {}, C5 {}".format(self.C3_size, self.C4_size, self.C5_size))
         print("FPN output channel size: P3 {}, P4 {}, P5 {}".format(self.channels_outs[1], self.channels_outs[1],
                                                                     self.channels_outs[0]))
