@@ -15,10 +15,10 @@ class PAN(nn.Module):
     P5 --->  PP5
     """
 
-    def __init__(self, P3_size=256, P4_size=256, P5_size=512, channels_outs=[256, 512, 512, 1024], version='s'):
+    def __init__(self, ch=[256, 256, 512], channel_outs=[256, 512, 512, 1024], version='s'):
         super(PAN, self).__init__()
         self.version = str(version)
-        self.channels_outs = channels_outs
+        self.channels_outs = channel_outs
         gains = {
                 'n': {'gd': 0.33, 'gw': 0.25},
                 's': {'gd': 0.33, 'gw': 0.5},
@@ -37,9 +37,9 @@ class PAN(nn.Module):
 
         self.re_channels_out()
 
-        self.P3_size = P3_size
-        self.P4_size = P4_size
-        self.P5_size = P5_size
+        self.P3_size = ch[0]
+        self.P4_size = ch[1]
+        self.P5_size = ch[2]
 
         self.convP3 = Conv(self.P3_size,  self.channels_outs[0], 3, 2)
         self.P4 = C3(self.channels_outs[0] + self.P4_size, self.channels_outs[1], self.get_depth(3), False)
