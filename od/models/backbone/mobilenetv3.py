@@ -191,9 +191,9 @@ class MobileNetV3(nn.Module):
             groups=1,
             act='hard_swish')
         self.out_channels.append(self.make_divisible(scale * cls_ch_squeeze))
-        self.out_shape = {'C3_size': self.out_channels[-3],
-                          'C4_size': self.out_channels[-2],
-                          'C5_size': self.out_channels[-1]}
+        self.out_shape = [self.out_channels[-3],
+                          self.out_channels[-2],
+                          self.out_channels[-1]]
 
     def make_divisible(self, v, divisor=8, min_value=None):
         if min_value is None:
