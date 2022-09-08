@@ -116,9 +116,7 @@ class ShuffleNetV2(nn.Module):
             nn.BatchNorm2d(output_channels),
             nn.ReLU(inplace=True),
         )
-        self.out_shape = {'C3_size': self.out_channels[1],
-                          'C4_size': self.out_channels[2],
-                          'C5_size': self.out_channels[3]}
+        self.out_shape = [self.out_channels[1], self.out_channels[2], self.out_channels[3]]
 
     def forward(self, x):
         x = self.conv1(x)
