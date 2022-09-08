@@ -39,9 +39,7 @@ class VGG(nn.Module):
         cfg = cfg[cfg.index('M') + 1: ]
         self.stage5, out_channels5 = make_layers(cfg[:cfg.index('M') + 1], in_channels=out_channels4, batch_norm=batch_norm)
         self._initialize_weights()
-        self.out_shape = {'C3_size': out_channels3,
-                          'C4_size': out_channels4,
-                          'C5_size': out_channels5}
+        self.out_shape = [out_channels3, out_channels4, out_channels5]
 
     def forward(self, x):
         x = self.stage1(x)
