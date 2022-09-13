@@ -1,6 +1,13 @@
 backbone:
   type: shufflenetv2
   version: x1_0  # x0_5, x1_0, x1_5, x2_0
+neck:
+  FPN:
+    channel_outs: [512, 256, 256]
+    version: s
+  PAN:
+    channel_out: [256, 512, 512, 1024]
+    version: s
 head:
   nc: 1
   stride: [8.0, 16.0, 32.0]

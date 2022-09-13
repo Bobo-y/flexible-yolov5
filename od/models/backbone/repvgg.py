@@ -161,9 +161,9 @@ class RepVGG(nn.Module):
         self.stage3, c4_channel = self._make_stage(int(256 * width_multiplier[2]), num_blocks[2], stride=2)
         self.stage4, c5_channel = self._make_stage(int(512 * width_multiplier[3]), num_blocks[3], stride=2)
 
-        self.out_shape = {'C3_size': c3_channel,
-                          'C4_size': c4_channel,
-                          'C5_size': c5_channel}
+        self.out_shape = [c3_channel,
+                          c4_channel,
+                          c5_channel]
 
     def _make_stage(self, planes, num_blocks, stride):
         strides = [stride] + [1]*(num_blocks-1)

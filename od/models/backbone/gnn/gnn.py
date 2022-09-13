@@ -112,9 +112,9 @@ class DeepGCN(torch.nn.Module):
                 idx += 1
         self.backbone = Seq(*self.backbone)
         self.model_init()
-        self.out_shape = {'C3_size': channels[-3],
-                          'C4_size': channels[-2],
-                          'C5_size': channels[-1]}
+        self.out_shape = [channels[-3],
+                          channels[-2],
+                          channels[-1]]
         print(self.out_shape)
 
     def model_init(self):

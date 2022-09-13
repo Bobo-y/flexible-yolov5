@@ -23,16 +23,17 @@ class Model(nn.Module):
         model_config = Dict(model_config)
         backbone_type = model_config.backbone.pop('type')
         self.backbone = build_backbone(backbone_type, **model_config.backbone)
-        backbone_out = self.backbone.out_shape
-        backbone_out['version'] = model_config.backbone.version
-        self.fpn = build_neck('FPN', **backbone_out)
-        fpn_out = self.fpn.out_shape
-
-        fpn_out['version'] = model_config.backbone.version
-        self.pan = build_neck('PAN', **fpn_out)
-
-        pan_out = self.pan.out_shape
-        model_config.head['ch'] = pan_out
+        ch_in = self.backbone.out_shape
+        
+        self.necks = nn.ModuleList()
+        necks_config = model.config.neck
+        for neck_name, neck_params in necks_config.items():
+            neck_params['ch'] = ch_in
+            neck = build_neck(neck_name, **neck_params)
+            ch_in = neck.out_shape
+            self.necks.append(neck)
+            
+        model_config.head['ch'] = ch_in
         self.detection = build_head('YOLOHead', **model_config.head)
         self.stride = self.detection.stride
         self._initialize_biases()
@@ -65,8 +66,8 @@ class Model(nn.Module):
 
     def forward(self, x):
         out = self.backbone(x)
-        out = self.fpn(out)
-        out = self.pan(out)
+        for neck in self.necks:
+            out = neck(out)
         y = self.detection(list(out))
         return y
 
