@@ -13,6 +13,13 @@ backbone:
   channels : [48, 96, 240, 384] # number of channels of deep features
   emb_dims : 1024 # Dimension of embeddings
   img_size: [640, 640]
+neck:
+  FPN:
+    channel_outs: [512, 256, 256]
+    version: s
+  PAN:
+    channel_out: [256, 512, 512, 1024]
+    version: s
 head:
   nc: 80
   stride: [8.0, 16.0, 32.0]
