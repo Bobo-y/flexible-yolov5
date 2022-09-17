@@ -45,9 +45,9 @@ class SpatialAttention(nn.Module):
         x = x.view(b, c, h * w)
         x = x.permute(0, 2, 1)
         if pool == "max":
-            x = F.max_pool1d(x, c)
+            x = F.max_pool1d(x, int(c))
         elif pool == "avg":
-            x = F.avg_pool1d(x, c)
+            x = F.avg_pool1d(x, int(c))
         x = x.permute(0, 2, 1)
         x = x.view(b, 1, h, w)
         return x
