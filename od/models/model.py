@@ -26,7 +26,7 @@ class Model(nn.Module):
         ch_in = self.backbone.out_shape
         
         self.necks = nn.ModuleList()
-        necks_config = model.config.neck
+        necks_config = model_config.neck
         for neck_name, neck_params in necks_config.items():
             neck_params['ch'] = ch_in
             neck = build_neck(neck_name, **neck_params)
