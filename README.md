@@ -108,7 +108,7 @@ All checkpoints are trained to 300 epochs with default settings, all backbones w
 |[swin-tiny]              |640  |  39.2 | 60.5  | 30691127
 |[gcn-tiny]              |640  | 33.8  |55.5   |  131474444
 |     <center>resnet with plug-in</center>                  |     |       |       | 
-|[resnet-18-cbam]              |640  |   |   |
+|[resnet-18-cbam]              |640  |35.2   |55.5   |15620399
 |[resnet-18-dcn]              |640  |   |   |
 
 
