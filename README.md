@@ -1,7 +1,7 @@
 # flexible-yolov5
 
 
-<center><img src="https://user-images.githubusercontent.com/9928596/191880047-a408e29c-4c6b-4e20-9318-0b23037ed64e.png" width="600" height="400"/></center>
+<div align=center><img src="https://user-images.githubusercontent.com/9928596/191880047-a408e29c-4c6b-4e20-9318-0b23037ed64e.png" width="600" height="400"/></div>
 
 
 *Update the code for  [ultralytics/yolov5](https://github.com/ultralytics/yolov5) version 6.1.*
