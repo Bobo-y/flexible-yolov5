@@ -70,7 +70,18 @@ class Model(nn.Module):
             out = neck(out)
         y = self.detection(list(out))
         return y
-
+    
+    def to(self, device):
+        self.backbone = self.backbone.to(device)
+        for idx in range(len(self.necks)):
+            self.necks[idx] = self.necks[idx].to(device)
+        self.detection = self.detection.to(device)
+        self.detection.stride = self.detection.stride.to(device)
+        for idx in range(len(self.detection.grid)):
+            self.detection.grid[idx] = self.detection.grid[idx].to(device)
+        for idx in range(len(self.detection.anchor_grid)):
+            self.detection.anchor_grid[idx] = self.detection.anchor_grid[idx].to(device)
+        return self
 
 if __name__ == '__main__':
     import os
