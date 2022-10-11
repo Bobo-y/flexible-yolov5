@@ -206,9 +206,12 @@ def run(
             correct = torch.zeros(npr, niou, dtype=torch.bool, device=device)  # init
             seen += 1
 
-            if npr == 0:
-                if nl:
-                    stats.append((correct, *torch.zeros((3, 0), device=device)))
+            if npr == 0:    #当模型的输出为0时
+                if nl:  #若原图存在标注
+                    # stats.append((correct, *torch.zeros((3, 0), device=device)))  #将conf, pcls, tcls都设置为0，但tcls明显不是0 
+                    stats.append((correct, *torch.zeros((2, 0), device=device), labels[:, 0]))
+                    if plots:
+                        confusion_matrix.process_batch(detections=None, labels=labels[:, 0])
                 continue
 
             # Predictions
