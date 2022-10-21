@@ -138,11 +138,21 @@ if __name__ == '__main__':
     save_dir = opt.save_dir
     if not os.path.exists(save_dir):
         os.mkdir(save_dir)
+    
+    # add score to box ----------------------start----------------
+    # class_names = []  # your classes labels
+    font = cv2.FONT_HERSHEY_SIMPLEX
     for img in imgs:
         im = cv2.imread(os.path.join(imgs_root, img))
         bboxes, scores, ids = model.detect_image(im)
         for idx in range(bboxes.shape[0]):
             bbox = bboxes[idx].astype(int)
-            score = scores[idx]
+            score = scores[idx].astype(float)
+            cls_id = ids[idx].astype(int)
             cv2.rectangle(im, (bbox[0], bbox[1]), (bbox[2], bbox[3]), (0, 0, 255), 2, 1)
+            # text = '{}:{:.1f}%'.format(class_names[cls_id], score * 100)  # you can use your class_names 
+            text = '{}:{:.1f}%'.format(cls_id, score * 100)
+            txt_size = cv2.getTextSize(text, font, 0.4, 1)[0]
+            cv2.putText(im, text, (bbox[0], bbox[1] + txt_size[1]), font, 0.8, (255, 255, 255), thickness=2)
         cv2.imwrite(os.path.join(save_dir, img), im)
+    # add score to box ----------------------end-----------------
