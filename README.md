@@ -170,7 +170,7 @@ privode c++ / python demo, scripts/trt_infer
 
 
 ## &#8627; Contributors
-[![Contributors repo roster for @Bobo-y/flexible-yolov5](https://reporoster.com/contributors/Bobo-y/flexible-yolov5)](https://github.com/Bobo-y/flexible-yolov5/graphs/contributors)
+<a href="https://github.com/ultralytics/yolov5/graphs/contributors">
    
 ## &#8627; Stargazers
 [![Stargazers repo roster for @Bobo-y/flexible-yolov5](https://reporoster.com/stars/Bobo-y/flexible-yolov5)](https://github.com/Bobo-y/flexible-yolov5/stargazers)
