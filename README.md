@@ -167,3 +167,9 @@ privode c++ / python demo, scripts/trt_infer
 * [drop_block](https://github.com/miguelvr/dropblock)
 * [trt quan](https://github.com/Wulingtian/nanodet_tensorrt_int8_tools)
 * [repvgg](https://github.com/DingXiaoH/RepVGG)
+
+### &#8627; Stargazers
+[![Stargazers repo roster for @Bobo-y/flexible-yolov5](https://reporoster.com/stars/Bobo-y/flexible-yolov5)](https://github.com/Bobo-y/flexible-yolov5/stargazers)
+
+### &#8627; Forkers
+[![Forkers repo roster for @Bobo-y/flexible-yolov5](https://reporoster.com/forks/Bobo-y/flexible-yolov5)](https://github.com/Bobo-y/flexible-yolov5/network/members)
