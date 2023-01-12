@@ -171,7 +171,7 @@ privode c++ / python demo, scripts/trt_infer
 
 ## &#8627; Contributors
 <a href="https://github.com/Bobo-y/flexible-yolov5/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=eryajf/learn-github" />
+  <img src="https://contrib.rocks/image?repo=Bobo-y/flexible-yolov5" />
 </a>
    
 ## &#8627; Stargazers
