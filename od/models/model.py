@@ -4,6 +4,7 @@ from torch import nn
 import math
 import yaml
 import torch
+import copy
 from od.models.modules.common import Conv
 from od.models.backbone import build_backbone
 from od.models.neck import build_neck
@@ -12,7 +13,7 @@ from utils.torch_utils import initialize_weights, fuse_conv_and_bn, model_info
 
 
 class Model(nn.Module):
-    def __init__(self, model_config):
+    def __init__(self, model_config, nc=None, anchors=None):
         """
         :param model_config:
         """
@@ -20,7 +21,17 @@ class Model(nn.Module):
         super(Model, self).__init__()
         if type(model_config) is str:
             model_config = yaml.load(open(model_config, 'r'), Loader=yaml.SafeLoader)
-        model_config = Dict(model_config)
+        if not isinstance(model_config, Dict):
+            model_config = Dict(model_config)
+        
+        if nc is not None:
+            model_config.head.nc = nc
+        if anchors is not None:
+            model_config.head.anchors = anchors
+            model_config.head['resume'] = True
+
+        self.yaml = copy.deepcopy(model_config)
+
         backbone_type = model_config.backbone.pop('type')
         self.backbone = build_backbone(backbone_type, **model_config.backbone)
         ch_in = self.backbone.out_shape

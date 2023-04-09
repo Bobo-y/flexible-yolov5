@@ -8,7 +8,7 @@ class YOLOHead(nn.Module):
     stride = None
     export = False
     onnx_dynamic = False
-    def __init__(self, nc, anchors=None, ch=(256, 512, 1024), stride=[8., 16., 32.], inplace=True):  # detection layer
+    def __init__(self, nc, anchors=None, ch=(256, 512, 1024), stride=[8., 16., 32.], inplace=True, resume=False):  # detection layer
         super(YOLOHead, self).__init__()
         if anchors is None:
             anchors = [[10, 13, 16, 30, 33, 23], [30, 61, 62, 45, 59, 119], [116, 90, 156, 198, 373, 326]]
@@ -24,7 +24,8 @@ class YOLOHead(nn.Module):
         self.register_buffer('anchors', torch.tensor(anchors).float().view(self.nl, -1, 2))  # shape(nl,na,2)
         self.m = nn.ModuleList(nn.Conv2d(x, self.no * self.na, 1) for x in ch)  # output conv
         self.stride = torch.tensor(stride)
-        self.anchors /= self.stride.view(-1, 1, 1)
+        if not resume:
+            self.anchors /= self.stride.view(-1, 1, 1)
         self.inplace = inplace  # use in-place ops (e.g. slice assignment)
         check_anchor_order(self)
 
