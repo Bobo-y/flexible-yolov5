@@ -50,6 +50,7 @@ class Model(nn.Module):
         self._initialize_biases()
 
         initialize_weights(self)
+        self.info()
 
     def _initialize_biases(self, cf=None):
         # initialize biases into Detect(), cf is class frequency
