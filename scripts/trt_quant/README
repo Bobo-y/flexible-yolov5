@@ -1,9 +1,6 @@
-yolov5 tensorrt int8 or fp16 量化, 代码参考自 [nanodet_tensorrt_int8_tools](https://github.com/Wulingtian/nanodet_tensorrt_int8_tools)
-
-将onnx 模型进行float16 或者int8 量化
-
+int8 engine
 ```shell script
-python scripts/trt_quant/convert_trt_quant.py --img_dir  /XXXX/train/  --img_size 640 --batch_size 6 --batch 200 --onnx_model runs/train/exp1/weights/bast.onnx  --mode int8 
+python scripts/trt_quant/generate_int8_engine.py --onnx path --images-dir  img_path  --save-engine  engine_path  
 ```
 
-this scripts run in tensorrt 7
+
