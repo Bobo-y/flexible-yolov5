@@ -29,6 +29,8 @@ Split the yolov5 model to {backbone, neck, head} to facilitate the operation of 
 
 
 ## Features
+- support QAT, for qat onnx export, need torch >=1.13(I only test on this version)  2023-10-17
+- update PTQ code , 2023-10-01
 - Reorganize model structure, such as backbone, neck, head, can modify the network flexibly and conveniently
 - mobilenetV3-small, mobilenetV3-large 
 - shufflenet_v2_x0_5, shufflenet_v2_x1_0, shufflenet_v2_x1_5, shufflenet_v2_x2_0
