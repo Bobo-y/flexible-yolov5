@@ -229,13 +229,13 @@ class QAT():
                     else:
                         module.disable()
             with torch.no_grad():
-                for i in tqdm(range(num_batch), total=num_batch, position=dist.get_rank()):
-                    for i, (imgs, targets, paths, _) in enumerate(self.train_dataloader):
-                        if isinstance(self.model, torch.nn.parallel.DistributedDataParallel) and i < len(self.train_dataloader) - 1:
-                            with torch.no_grad():
-                                self.model(imgs)
-                        else:
+                for i, (imgs, targets, paths, _) in enumerate(self.train_dataloader):
+                    imgs = imgs.to(device).float() / 255.
+                    if isinstance(self.model, torch.nn.parallel.DistributedDataParallel) and i < len(self.train_dataloader) - 1:
+                        with torch.no_grad():
                             self.model(imgs)
+                    else:
+                        self.model(imgs)
                     if i >= num_batch:
                         break
 
@@ -248,5 +248,5 @@ class QAT():
                     else:
                         module.enable()
         device = torch.cuda.current_device()
-        collect_stats(model, device, num_batch=num_batch)
-        compute_amax(model, device, method="mse")
+        collect_stats(model, 'cuda:' + str(device), num_batch=num_batch)
+        compute_amax(model, 'cuda:' + str(device), method="mse")
