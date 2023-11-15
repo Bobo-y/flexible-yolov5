@@ -138,10 +138,8 @@ In projects folder, tf_serving and triton demo are provided.
 
 You can directly quantify the onnx model
 
-This script run succ on Tensorrt 7.x. For 8.x, this code need be rewrite.
-
 ```shell
-python scripts/trt_quant/convert_trt_quant.py  --img_dir  /XXXX/train/  --img_size 640 --batch_size 6 --batch 200 --onnx_model runs/train/exp1/weights/bast.onnx  --mode int8
+python scripts/trt_quant/generate_int8_engine.py --onnx path --images-dir  img_path  --save-engine  engine_path
 ```
 [See](scripts/trt_quant/README)
 
