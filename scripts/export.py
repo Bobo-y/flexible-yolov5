@@ -102,7 +102,7 @@ def export_torchscript(model, im, file, optimize, prefix=colorstr('TorchScript:'
         LOGGER.info(f'{prefix} export failure: {e}')
 
 
-def export_onnx(model, im, file, opset, train, dynamic, simplify, prefix=colorstr('ONNX:')):
+def export_onnx(model, im, file, opset, train, dynamic, simplify, deploy=False, prefix=colorstr('ONNX:')):
     # YOLOv5 ONNX export
     try:
         check_requirements(('onnx',))
@@ -110,7 +110,11 @@ def export_onnx(model, im, file, opset, train, dynamic, simplify, prefix=colorst
 
         LOGGER.info(f'\n{prefix} starting export with onnx {onnx.__version__}...')
         f = file.with_suffix('.onnx')
-
+        if deploy:
+            for name, module in model.named_modules():
+                if hasattr(module, 'switch_to_deploy'):
+                    module.switch_to_deploy()
+                    
         torch.onnx.export(
             model.cpu() if dynamic else model,  # --dynamic only compatible with cpu
             im.cpu() if dynamic else im,
