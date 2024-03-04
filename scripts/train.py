@@ -29,6 +29,10 @@ import yaml
 from torch.nn.parallel import DistributedDataParallel as DDP
 from torch.optim import SGD, Adam, AdamW, lr_scheduler
 from tqdm import tqdm
+try:
+    from apex.contrib.sparsity import ASP
+except:
+    pass
 
 FILE = Path(__file__).resolve()
 ROOT = FILE.parents[0]  # YOLOv5 root directory
@@ -207,6 +211,11 @@ def train(hyp, opt, device, callbacks):  # hyp is path/to/hyp.yaml or hyp dictio
         del ckpt, csd
 
     # DP mode
+    if opt.sparsity:
+        ASP.init_model_for_pruning(model, mask_calculator='m4n2_1d', verbosity=2, whitelist=[torch.nn.Linear, torch.nn.Conv2D],
+                                   allow_recompute_mask=False, disallowed_layer_names=opt.sparsity_ignore_names, allow_permutation=False)
+        ASP.init_optimizer_for_pruning(optimizer)
+        ASP.compute_sparse_masks()
     if cuda and RANK == -1 and torch.cuda.device_count() > 1:
         LOGGER.warning('WARNING: DP not recommended, use torch.distributed.run for best DDP Multi-GPU results.\n'
                        'See Multi-GPU Tutorial at https://github.com/ultralytics/yolov5/issues/475 to get started.')
@@ -517,6 +526,9 @@ def parse_opt(known=False):
     
     parser.add_argument('--qat', type=bool, default=False, help='use qat')
     parser.add_argument('--calibrate_step', type=int, default=128, help='qat calibrate_step')
+
+    parser.add_argument('--sparsity', type=bool, default=False, help='use asp sparsity')
+    parser.add_argument('--sparsity_ignore_names', type=list, default=[], help='layer names not sparsity')
 
     opt = parser.parse_known_args()[0] if known else parser.parse_args()
     return opt

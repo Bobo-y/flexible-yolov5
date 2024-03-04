@@ -29,6 +29,7 @@ Split the yolov5 model to {backbone, neck, head} to facilitate the operation of 
 
 
 ## Features
+- support nvidia tensor-core 4:2 sparsity.
 - support QAT, for qat onnx export, need torch >=1.13(I only test on this version)  2023-10-17
 - update PTQ code , 2023-10-01
 - Reorganize model structure, such as backbone, neck, head, can modify the network flexibly and conveniently
@@ -80,6 +81,18 @@ For training and Testing, it's same like yolov5.
 3. 
 ```shell script
 $ python scripts/train.py  --batch 16 --epochs 5 --data configs/data.yaml --cfg configs/model_XXX.yaml
+```
+
+```shell
+# for nvidia tensor-core 4:2 sparsity, install apex
+
+git clone https://github.com/NVIDIA/apex
+cd apex
+# if pip >= 23.1 (ref: https://pip.pypa.io/en/stable/news/#v23-1) which supports multiple `--config-settings` with the same key... 
+pip install -v --disable-pip-version-check --no-cache-dir --no-build-isolation --config-settings "--build-option=--cpp_ext" --config-settings "--build-option=--cuda_ext" ./
+# otherwise
+pip install -v --disable-pip-version-check --no-cache-dir --no-build-isolation --global-option="--cpp_ext" --global-option="--cuda_ext" ./
+
 ```
 
 A google colab demo in train_demo.ipynb
