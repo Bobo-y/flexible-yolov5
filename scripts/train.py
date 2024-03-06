@@ -183,7 +183,13 @@ def train(hyp, opt, device, callbacks):  # hyp is path/to/hyp.yaml or hyp dictio
     else:
         lf = lambda x: (1 - x / epochs) * (1.0 - hyp['lrf']) + hyp['lrf']  # linear
     scheduler = lr_scheduler.LambdaLR(optimizer, lr_lambda=lf)  # plot_lr_scheduler(optimizer, scheduler, epochs)
-
+    
+    # sparsity
+    if opt.sparsity:
+        ASP.init_model_for_pruning(model, mask_calculator='m4n2_1d', verbosity=2, whitelist=[torch.nn.Linear, torch.nn.Conv2D],
+                                   allow_recompute_mask=True, disallowed_layer_names=opt.sparsity_ignore_names, allow_permutation=False)
+        ASP.init_optimizer_for_pruning(optimizer)
+        ASP.compute_sparse_masks()
     # EMA
     ema = ModelEMA(model) if RANK in {-1, 0} else None
 
@@ -197,7 +203,7 @@ def train(hyp, opt, device, callbacks):  # hyp is path/to/hyp.yaml or hyp dictio
 
         # EMA
         if ema and ckpt.get('ema'):
-            ema.ema.load_state_dict(ckpt['ema'].float().state_dict())
+            ema.ema.load_state_dict(ckpt['ema'].float().state_dict(), strict=False)
             ema.updates = ckpt['updates']
 
         # Epochs
@@ -211,11 +217,6 @@ def train(hyp, opt, device, callbacks):  # hyp is path/to/hyp.yaml or hyp dictio
         del ckpt, csd
 
     # DP mode
-    if opt.sparsity:
-        ASP.init_model_for_pruning(model, mask_calculator='m4n2_1d', verbosity=2, whitelist=[torch.nn.Linear, torch.nn.Conv2D],
-                                   allow_recompute_mask=True, disallowed_layer_names=opt.sparsity_ignore_names, allow_permutation=False)
-        ASP.init_optimizer_for_pruning(optimizer)
-        ASP.compute_sparse_masks()
     if cuda and RANK == -1 and torch.cuda.device_count() > 1:
         LOGGER.warning('WARNING: DP not recommended, use torch.distributed.run for best DDP Multi-GPU results.\n'
                        'See Multi-GPU Tutorial at https://github.com/ultralytics/yolov5/issues/475 to get started.')
